@@ -30,7 +30,7 @@ jobs:
           use-verbose-mode: "yes"
 
   build-and-test:
-    name: Build & Test Nextwiki
+    name: Build & Test Messier-61
     needs: [yaml-lint, markdown-lint, markdown-link-check]
     runs-on: ubuntu-latest
     strategy:
@@ -51,7 +51,7 @@ jobs:
         run: npm run build
 
   test-doc-build:
-    name: Test Nextwiki Documentation Build
+    name: Test Messier-61 Documentation Build
     needs: [yaml-lint, markdown-lint, markdown-link-check]
     runs-on: ubuntu-latest
     defaults:
@@ -63,6 +63,7 @@ jobs:
         with:
           node-version: 18
           cache: yarn
+          cache-dependency-path: './docs/package-lock.json'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build documentation
