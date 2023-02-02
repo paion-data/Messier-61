@@ -3,7 +3,6 @@ sidebar_position: 1
 title: Getting Started
 ---
 
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Available Scripts
@@ -13,7 +12,9 @@ In the project directory, you can run:
 
 ### `npm start`
 
+<!-- markdown-link-check-disable -->
 Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- markdown-link-check-enable -->
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
@@ -46,9 +47,24 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t
 customize it when you are ready for it.
 
-## Learn More
+Learn More
+----------
 
 You can learn more in the
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Troubleshooting
+---------------
+
+### Docusaurus Blogs Relative Linking is Treated False-Negative by CI Markdown Link check
+
+CI check for Markdown link (`markdown-link-check`) is turned on and it's not smart enough to detect relative linking by
+Docusaurus. The workaround is to disable the link check at the relevant line. For example:
+
+```markdown
+<!-- markdown-link-check-disable -->
+known. Additionally, this process makes it easy to implement a [blue-green deployment](continuous-delivery) or
+<!-- markdown-link-check-enable -->
+```
