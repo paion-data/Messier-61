@@ -1,0 +1,70 @@
+# Copyright 2023 Paion Data. All rights reserved.
+---
+name: Test
+
+"on":
+  workflow_call:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  yaml-lint:
+    name: YAML Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actionshub/yamllint@main
+  markdown-lint:
+    name: Markdown Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actionshub/markdownlint@main
+  markdown-link-check:
+    name: Markdown Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-verbose-mode: "yes"
+
+  build-and-test:
+    name: Build & Test Messier-61
+    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [16]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set node version to ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+
+  test-doc-build:
+    name: Test Messier-61 Documentation Build
+    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: './docs/package-lock.json'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build documentation
+        run: yarn build
