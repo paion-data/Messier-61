@@ -1,6 +1,8 @@
 Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 ==========
 
+Messier-61 is under busy development for its Feb. beta release. Stay tunned.
+
 License
 -------
 

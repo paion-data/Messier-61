@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Knowledge Graph Based Wiki Framework
+            Knowledge Graph Based Wiki React Framework
           </Link>
         </div>
       </div>
