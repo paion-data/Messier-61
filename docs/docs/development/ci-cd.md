@@ -13,6 +13,9 @@ Testing
    - Markdown link check
 
 2. Build and test Messier-61
+
+   - The build process checks code style again using [Prettier][Prettier]
+
 3. Test Build Messier-61 Documentation
 
 Release Process
@@ -20,11 +23,12 @@ Release Process
 
 ### Messier-61
 
-1. Fetch the tags from the adjusted remote
-2. Get the last tag on the working branch
-3. Build (`.github/upversion.py`) and push the new tag as the new release version.
-4. Bump Messier-61 version the new release version
-5. Push Messier-61 to [NPM registry][Messier-61 npm repo]
+1. [Comprehensively test](#testing)
+2. Fetch the tags from the adjusted remote
+3. Get the last tag on the working branch
+4. Build (`.github/upversion.py`) and push the new tag as the new release version.
+5. Bump Messier-61 version the new release version
+6. Push Messier-61 to [NPM registry][Messier-61 npm repo]
 
 ### Messier-61 Documentation
 
@@ -44,3 +48,5 @@ The CI/CD for documentation achieves 2 goals:
 [GitHub Actions]: https://docusaurus.io/docs/deployment#deploying-to-github-pages
 
 [Messier-61 npm repo]: https://www.npmjs.com/package/@paiondata/messier-61
+
+[Prettier]: https://prettier.io/

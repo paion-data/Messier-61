@@ -17,18 +17,18 @@ jobs:
     name: Publish NPM Packages
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # allow for pushing tag
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # https://github.com/actions/checkout/issues/338#issuecomment-732300720
+          fetch-depth: 0
       - name: Set node version to 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: npm
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
       - name: Tag for release
         run: |
           git config --global user.name 'QubitPi'
@@ -58,7 +58,7 @@ jobs:
         with:
           node-version: 18
           cache: yarn
-          cache-dependency-path: './docs/package-lock.json'
+          cache-dependency-path: "./docs/package-lock.json"
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build documentation
