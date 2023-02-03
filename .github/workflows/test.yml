@@ -47,6 +47,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm install
+      - name: Code style check
+        run: npx prettier --check .
       - name: Build
         run: npm run build
 
