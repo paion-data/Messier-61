@@ -17,6 +17,12 @@ Testing
    - The build process checks code style again using [Prettier][Prettier]
    - The process also runs static code anslysis using [ESLint][ESLint]
 
+     :::caution
+
+     ESLint currently does not run on documentation source codes, i.e. `/docs`
+
+     :::
+
 3. Test Build Messier-61 Documentation
 
 Release Process
