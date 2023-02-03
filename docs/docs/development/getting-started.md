@@ -22,6 +22,20 @@ We can have Prettier watch for changes from the command line by using our integr
 npm run prettier-watch
 ```
 
+### ESLint
+
+#### Run Static Code Analysis Using ESLint
+
+```bash
+npx eslint .
+```
+
+:::caution
+
+ESLint currently does not run on documentation source codes, i.e. `/docs`
+
+:::
+
 ### `npm start`
 
 <!-- markdown-link-check-disable -->

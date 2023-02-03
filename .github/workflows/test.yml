@@ -49,6 +49,8 @@ jobs:
         run: npm install
       - name: Code style check
         run: npx prettier --check .
+      - name: Static code analysis
+        run: npx eslint .
       - name: Build
         run: npm run build
 

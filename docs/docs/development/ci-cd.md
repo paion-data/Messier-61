@@ -15,6 +15,13 @@ Testing
 2. Build and test Messier-61
 
    - The build process checks code style again using [Prettier][Prettier]
+   - The process also runs static code anslysis using [ESLint][ESLint]
+
+     :::caution
+
+     ESLint currently does not run on documentation source codes, i.e. `/docs`
+
+     :::
 
 3. Test Build Messier-61 Documentation
 
@@ -44,6 +51,8 @@ The CI/CD for documentation achieves 2 goals:
    actually deploying. This job is called `test-doc-build`.
 2. When a pull request is merged to the `master` branch, it will be built and deployed to the `gh-pages` branch. After
    that, the new build output will be served on the GitHub Pages site. This job is `deploy-documentation` called deploy.
+
+[ESLint]: https://eslint.org/
 
 [GitHub Actions]: https://docusaurus.io/docs/deployment#deploying-to-github-pages
 
