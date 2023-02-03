@@ -6,7 +6,6 @@ Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 ![GitHub last commit (master)](https://img.shields.io/github/last-commit/paion-data/messier-61/master?logo=github&style=for-the-badge)
 [![Prettier][Prettier badge]](https://prettier.io/)
 
-
 _**Messier-61 is under busy development for its Feb. beta release. Stay tunned.**_
 
 License

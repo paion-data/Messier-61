@@ -3,12 +3,24 @@ sidebar_position: 1
 title: Getting Started
 ---
 
-
-
 Available Scripts
 -----------------
 
-In the project directory, you can run:
+### Prettier
+
+#### Format Code Using Prettier
+
+```bash
+npx prettier --write .
+```
+
+#### Watching For Changes
+
+We can have Prettier watch for changes from the command line by using our integrated [onchange][onchange]:
+
+```bash
+npm run prettier-watch
+```
 
 ### `npm start`
 
@@ -68,3 +80,5 @@ Docusaurus. The workaround is to disable the link check at the relevant line. Fo
 known. Additionally, this process makes it easy to implement a [blue-green deployment](continuous-delivery) or
 <!-- markdown-link-check-enable -->
 ```
+
+[onchange]: https://www.npmjs.com/package/onchange
