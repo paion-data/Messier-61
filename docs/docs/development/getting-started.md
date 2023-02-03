@@ -58,7 +58,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 Troubleshooting
 ---------------
 
-### Docusaurus Blogs Relative Linking is Treated False-Negative by CI Markdown Link check
+### Docusaurus Relative Linking is Treated False-Negative by CI Markdown Link check
 
 CI check for Markdown link (`markdown-link-check`) is turned on and it's not smart enough to detect relative linking by
 Docusaurus. The workaround is to disable the link check at the relevant line. For example:
