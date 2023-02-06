@@ -10,7 +10,7 @@ interface WelcomeProps {
 }
 
 /**
- * The components that's shows welcome-page
+ * The components shows welcome-page
  */
 const Welcome = (props: WelcomeProps): JSX.Element => {
   return (
