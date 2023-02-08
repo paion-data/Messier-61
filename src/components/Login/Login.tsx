@@ -11,8 +11,8 @@ interface LoginProps {
 }
 
 Login.defaultProps = {
-  backgroundUrl: ''
-  logoUrl: ''
+  backgroundUrl: '',
+  logoUrl: '',
   appName: ''
 };
 
