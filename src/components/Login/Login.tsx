@@ -10,12 +10,6 @@ interface LoginProps {
   appName: string;
 }
 
-Login.defaultProps = {
-  backgroundUrl: "",
-  logoUrl: "",
-  appName: "",
-};
-
 const Login = (props: LoginProps): JSX.Element => {
   handleSubmit = (e) => {
     e.preventDefault();
@@ -74,6 +68,12 @@ const Login = (props: LoginProps): JSX.Element => {
       </div>
     </div>
   );
+};
+
+Login.defaultProps = {
+  backgroundUrl: "",
+  logoUrl: "",
+  appName: "",
 };
 
 export default Login;
