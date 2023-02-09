@@ -1,6 +1,7 @@
 {
   "name": "@paiondata/messier-61",
   "version": "0.1.0",
+  "type": "module",
   "engines": {
     "node": ">=16.0.0 <18.0.0"
   },
