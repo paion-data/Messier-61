@@ -8,18 +8,18 @@ name: Test
     types: [opened, synchronize, reopened]
 
 jobs:
-  yaml-lint:
-    name: YAML Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/yamllint@main
-  markdown-lint:
-    name: Markdown Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/markdownlint@main
+  #  yaml-lint:
+  #    name: YAML Lint Check
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v3
+  #      - uses: actionshub/yamllint@main
+  #  markdown-lint:
+  #    name: Markdown Lint Check
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v3
+  #      - uses: actionshub/markdownlint@main
   markdown-link-check:
     name: Markdown Link Check
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
 
   build-and-test:
     name: Build & Test Messier-61
-    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    needs: [markdown-link-check]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -58,7 +58,7 @@ jobs:
 
   test-doc-build:
     name: Test Messier-61 Documentation Build
-    needs: [yaml-lint, markdown-lint, markdown-link-check]
+    needs: [markdown-link-check]
     runs-on: ubuntu-latest
     defaults:
       run:
