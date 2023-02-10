@@ -23,6 +23,8 @@ Testing
 
      :::
 
+   - The tests are run using `npm test` in Jest framework
+
 3. Test Build Messier-61 Documentation
 
 Release Process
