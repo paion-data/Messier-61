@@ -51,6 +51,8 @@ jobs:
         run: npx prettier --check .
       - name: Static code analysis
         run: npx eslint .
+      - name: Run tests
+        run: npm test
       - name: Build
         run: npm run build
 
