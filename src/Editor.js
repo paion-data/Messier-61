@@ -1,3 +1,5 @@
+// Copyright 2023 Paion Data. All rights reserved.
+import React from "react";
 import ExampleTheme from "./themes/ExampleTheme";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
