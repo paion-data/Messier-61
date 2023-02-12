@@ -44,8 +44,8 @@ const editorConfig = {
     TableCellNode,
     TableRowNode,
     AutoLinkNode,
-    LinkNode
-  ]
+    LinkNode,
+  ],
 };
 
 export default function Editor() {
