@@ -1,4 +1,5 @@
 // Copyright 2023 Paion Data. All rights reserved.
+import React from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { TreeView } from "@lexical/react/LexicalTreeView";
 

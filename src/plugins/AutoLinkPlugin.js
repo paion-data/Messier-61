@@ -1,3 +1,4 @@
+import React from "react";
 import { AutoLinkPlugin } from "@lexical/react/LexicalAutoLinkPlugin";
 
 const URL_MATCHER =
