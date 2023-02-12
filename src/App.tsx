@@ -1,21 +1,24 @@
+// Copyright 2023 Paion Data. All rights reserved.
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Editor from "./Editor";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      <h1>nextwiki</h1>
+      <p>beta development version</p>
+      <Editor />
+      <div className="other">
+        <h2>Other Examples</h2>
+        <ul>
+          <li>
+            <a href="https://codesandbox.io/s/lexical-rich-text-example-5tncvy" target="_blank" rel="noreferrer">
+              Rich text example
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
-
-export default App;
