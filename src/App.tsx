@@ -2,15 +2,11 @@
 import React from "react";
 import "./App.css";
 
-import avatar from "./images/avatar.png";
-import twitch from "./images/twitch.png";
-import steam from "./images/steam.png";
-import upcoming from "./images/upcoming.png";
-import library from "./images/library.png";
-import controller from "./images/controller.png";
-import assassins from "./images/assassins.png";
-import sackboy from "./images/sackboy.png";
-import spiderman from "./images/spiderman.png";
+import githubIcon from "./images/github-icon.png";
+import docIcon from "./images/doc-icon.png";
+import wikiIcon from "./images/wiki-icon.webp";
+import knowledgeGraph from "./images/knowledge-graph.png";
+import genshinImpact from "./images/genshin-impact.webp";
 
 export default function App(): JSX.Element {
   return (
@@ -19,65 +15,41 @@ export default function App(): JSX.Element {
         <section className="glass">
           <div className="dashboard">
             <div className="user">
-              <img src={avatar} alt="" />
-              <h3>Simo Edwin</h3>
-              <p>Pro Member</p>
+              <img src="https://paion-data.github.io/Messier-61/img/logo.svg" width="100px" alt="" />
+              <h3>Messier 61</h3>
+              <p>Next Generation of Wiki</p>
             </div>
             <div className="links">
               <div className="link">
-                <img src={twitch} alt="" />
-                <h2>Streams</h2>
+                <img src={docIcon} width="40px" alt="" />
+                <h2>Add</h2>
               </div>
               <div className="link">
-                <img src={steam} alt="" />
-                <h2>Games</h2>
+                <img src={githubIcon} width="40px" alt="" />
+                <h2>GitHub</h2>
               </div>
               <div className="link">
-                <img src={upcoming} alt="" />
-                <h2>New</h2>
-              </div>
-              <div className="link">
-                <img src={library} alt="" />
-                <h2>Library</h2>
+                <img src={wikiIcon} width="40px" alt="" />
+                <h2>Help</h2>
               </div>
             </div>
             <div className="pro">
-              <h2>Join pro for free games.</h2>
-              <img src={controller} alt="" />
+              <h2>Knowledge Graph Based</h2>
+              <img src={knowledgeGraph} width="120px" alt="" />
             </div>
           </div>
           <div className="games">
             <div className="status">
-              <h1>Active Games</h1>
+              <h1>Recent Wikis</h1>
               <input type="text" />
             </div>
             <div className="cards">
               <div className="card">
-                <img src={assassins} alt="" />
+                <img src={genshinImpact} width="105px" alt="" />
                 <div className="card-info">
-                  <h2>Assassins Creed Valhalla</h2>
-                  <p>PS5 Version</p>
-                  <div className="progress"></div>
+                  <h2>Genshin Impact</h2>
+                  <p>Gaming Strategy</p>
                 </div>
-                <h2 className="percentage">60%</h2>
-              </div>
-              <div className="card">
-                <img src={sackboy} alt="" />
-                <div className="card-info">
-                  <h2>Sackboy A Great Advanture</h2>
-                  <p>PS5 Version</p>
-                  <div className="progress"></div>
-                </div>
-                <h2 className="percentage">60%</h2>
-              </div>
-              <div className="card">
-                <img src={spiderman} alt="" />
-                <div className="card-info">
-                  <h2>Spiderman Miles Morales</h2>
-                  <p>PS5 Version</p>
-                  <div className="progress"></div>
-                </div>
-                <h2 className="percentage">60%</h2>
               </div>
             </div>
           </div>
