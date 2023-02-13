@@ -30,6 +30,7 @@
     "eslint-plugin-react": "^7.31.11",
     "onchange": "^7.1.0",
     "prettier": "2.8.1",
+    "react-router-dom": "^6.8.1",
     "typescript": "^4.9.5"
   },
   "scripts": {
