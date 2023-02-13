@@ -6,11 +6,10 @@ Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 </div>
 
 [![npm registry][npm registry]](https://www.npmjs.com/package/@paiondata/messier-61)
-[![GitHub Workflow Status][release status]](https://github.com/paion-data/messier-61/actions/workflows/release.yml)
-![GitHub last commit (master)](https://img.shields.io/github/last-commit/paion-data/messier-61/master?logo=github&style=for-the-badge)
 [![Prettier][Prettier badge]](https://prettier.io/)
 [![License Badge][license badge]](https://www.apache.org/licenses/LICENSE-2.0)
-
+[![GitHub Workflow Status][release status]](https://github.com/paion-data/messier-61/actions/workflows/release.yml)
+![GitHub last commit (master)](https://img.shields.io/github/last-commit/paion-data/messier-61/master?logo=github&style=for-the-badge)
 [![project planning][project planning]](https://github.com/orgs/paion-data/projects/6)
 [![milestones][milestones]](https://github.com/paion-data/Messier-61/milestones)
 
