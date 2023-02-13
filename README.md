@@ -11,7 +11,7 @@ Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 [![GitHub Workflow Status][release status]](https://github.com/paion-data/messier-61/actions/workflows/release.yml)
 ![GitHub last commit (master)](https://img.shields.io/github/last-commit/paion-data/messier-61/master?logo=github&style=for-the-badge)
 [![project planning][project planning]](https://github.com/orgs/paion-data/projects/6)
-[![milestones][milestones]](https://github.com/paion-data/Messier-61/milestones)
+[![milestones][milestones]](https://github.com/paion-data/Messier-61/milestones?direction=asc&sort=due_date&state=open)
 
 _**Messier-61 is under busy development for its Feb. beta release. Stay tunned.**_
 
