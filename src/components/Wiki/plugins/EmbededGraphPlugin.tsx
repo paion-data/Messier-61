@@ -1,14 +1,8 @@
 // Copyright 2023 Paion Data. All rights reserved.
 import React from "react";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { ForceGraph3D } from "react-force-graph";
-import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function Messier61GraphPlugin() {
-  const [editor] = useLexicalComposerContext();
-
-  const [content, setContent] = useState<string>("");
-
+export default function Messier61GraphPlugin(): JSX.Element {
   const myData = {
     nodes: [
       {
