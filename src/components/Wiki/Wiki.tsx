@@ -1,7 +1,7 @@
 // Copyright 2023 Paion Data. All rights reserved.
 import React from "react";
 import "./Wiki.css";
-import Editor from "./Editor";
+import Editor from "./Editor.mts";
 
 export default function App(): JSX.Element {
   return (
