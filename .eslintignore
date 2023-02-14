@@ -1,1 +1,7 @@
 docs/**
+build/**
+
+src/components/Wiki/plugins/ListMaxIndentLevelPlugin.js
+src/components/Wiki/plugins/Messier61GraphPlugin.tsx
+src/components/Wiki/plugins/ToolbarPlugin.js
+src/components/Wiki/plugins/ListMaxIndentLevelPlugin.js
