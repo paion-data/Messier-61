@@ -54,9 +54,22 @@ The CI/CD for documentation achieves 2 goals:
 2. When a pull request is merged to the `master` branch, it will be built and deployed to the `gh-pages` branch. After
    that, the new build output will be served on the GitHub Pages site. This job is `deploy-documentation` called deploy.
 
+Troubleshooting
+---------------
+
+### Error: Docker pull failed with exit code 1
+
+We found that one of our CI/CD jobs broken itself without any code change on Messier-61 side: 
+
+![Error loading github-upstream-issue.png](./img/github-upstream-issue.png)
+
+In most cases this is not a Messier-61 issue, but an [upstream service][GitHub Packages] downtime issue. The best of
+what we can do is focusing on other priorities and come back later after the upstream fixes the issue.
+
 [ESLint]: https://eslint.org/
 
 [GitHub Actions]: https://docusaurus.io/docs/deployment#deploying-to-github-pages
+[GitHub Packages]: ghcr.io
 
 [Messier-61 npm repo]: https://www.npmjs.com/package/@paiondata/messier-61
 
