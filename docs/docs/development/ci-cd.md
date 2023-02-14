@@ -59,7 +59,7 @@ Troubleshooting
 
 ### Error: Docker pull failed with exit code 1
 
-We found that one of our CI/CD jobs broken itself without any code change on Messier-61 side: 
+We found that one of our CI/CD jobs broken itself without any code change on Messier-61 side:
 
 ![Error loading github-upstream-issue.png](./img/github-upstream-issue.png)
 
@@ -69,7 +69,7 @@ what we can do is focusing on other priorities and come back later after the ups
 [ESLint]: https://eslint.org/
 
 [GitHub Actions]: https://docusaurus.io/docs/deployment#deploying-to-github-pages
-[GitHub Packages]: ghcr.io
+[GitHub Packages]: https://github.com/features/packages
 
 [Messier-61 npm repo]: https://www.npmjs.com/package/@paiondata/messier-61
 
