@@ -2,7 +2,7 @@
 import React from "react";
 import "./Home.css";
 
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import githubIcon from "./images/github-icon.png";
 import docIcon from "./images/doc-icon.png";
