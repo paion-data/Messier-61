@@ -63,7 +63,6 @@ export default function Editor() {
           <HistoryPlugin />
           <TreeViewPlugin />
           <AutoFocusPlugin />
-          <CodeHighlightPlugin />
           <ListPlugin />
           <LinkPlugin />
           <AutoLinkPlugin />
