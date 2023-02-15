@@ -27,10 +27,11 @@ function Placeholder(): JSX.Element {
 }
 
 const editorConfig = {
+  namespace: "Messier-61",
   // The editor theme
   theme: DefaultTheme,
   // Handling of errors during update
-  onError(error) {
+  onError(error: any) {
     throw error;
   },
   // Any custom nodes go here
