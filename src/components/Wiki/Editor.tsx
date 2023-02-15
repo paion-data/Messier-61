@@ -22,7 +22,7 @@ import { TRANSFORMERS } from "@lexical/markdown";
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
-function Placeholder() {
+function Placeholder(): JSX.Element {
   return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
@@ -49,7 +49,7 @@ const editorConfig = {
   ],
 };
 
-export default function Editor() {
+export default function Editor(): JSX.Element {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
