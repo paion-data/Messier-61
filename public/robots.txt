@@ -1,3 +1,4 @@
+# Copyright 2023 Paion Data. All rights reserved.
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:

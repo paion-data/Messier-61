@@ -1,3 +1,4 @@
+//Copyright 2023 Paion Data. All rights reserved.
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 

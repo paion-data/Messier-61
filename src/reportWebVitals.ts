@@ -1,3 +1,4 @@
+//Copyright 2023 Paion Data. All rights reserved.
 import { ReportHandler } from "web-vitals";
 
 /* eslint-disable */
