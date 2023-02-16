@@ -1,4 +1,4 @@
-//Copyright 2023 Paion Data. All rights reserved.
+// Copyright 2023 Paion Data. All rights reserved.
 /**
  * Creating a sidebar enables you to:
  - create an ordered group of docs
