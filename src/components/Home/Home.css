@@ -4,12 +4,17 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 h1 {
   color: #426696;
   font-weight: 600;
   font-size: 3rem;
   opacity: 0.8;
 }
+
 h2,
 p {
   color: #658ec6;
@@ -42,6 +47,7 @@ main {
   backdrop-filter: blur(2rem);
   display: flex;
 }
+
 .circle1,
 .circle2 {
   background: white;
@@ -56,10 +62,12 @@ main {
   top: 5%;
   right: 15%;
 }
+
 .circle2 {
   bottom: 5%;
   left: 10%;
 }
+
 .dashboard {
   flex: 1;
   display: flex;
@@ -70,12 +78,14 @@ main {
   background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
   border-radius: 2rem;
 }
+
 .link {
   display: flex;
   margin: 2rem 0rem;
   padding: 1rem 5rem;
   align-items: center;
 }
+
 .link h2 {
   padding: 0rem 2rem;
 }
@@ -97,6 +107,7 @@ main {
   top: 5%;
   right: 5%;
 }
+
 .pro h2 {
   width: 40%;
   color: white;

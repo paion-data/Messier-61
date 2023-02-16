@@ -28,11 +28,11 @@ export default function App(): JSX.Element {
               </div>
               <div className="link">
                 <img src={githubIcon} width="40px" alt="" />
-                <h2>GitHub</h2>
+                <a href="https://github.com/paion-data/Messier-61"><h2>GitHub</h2></a>
               </div>
               <div className="link">
                 <img src={wikiIcon} width="40px" alt="" />
-                <h2>Help</h2>
+                <a href="https://paion-data.github.io/Messier-61/"><h2>Help</h2></a>
               </div>
             </div>
             <div className="pro">
