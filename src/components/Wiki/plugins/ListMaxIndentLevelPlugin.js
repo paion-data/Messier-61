@@ -1,3 +1,4 @@
+// Copyright 2023 Paion Data. All rights reserved.
 import { $getListDepth, $isListItemNode, $isListNode } from "@lexical/list";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {

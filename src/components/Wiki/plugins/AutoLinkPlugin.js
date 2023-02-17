@@ -1,3 +1,4 @@
+// Copyright 2023 Paion Data. All rights reserved.
 import React from "react";
 import { AutoLinkPlugin } from "@lexical/react/LexicalAutoLinkPlugin";
 
