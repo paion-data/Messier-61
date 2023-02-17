@@ -3,38 +3,35 @@ sidebar_position: 1
 title: Getting Started
 ---
 
+Before committing your code, please run the following checks locally in order to give ourselves better confidence that
+the code will pass the automated checks online:
+
+1. Prettier our code:
+
+   ```bash
+   npx prettier --write .
+   ```
+
+2. Check code style using ESLint:
+
+   ```bash
+   npx eslint .
+   ```
+
+   :::caution
+
+   ESLint currently does not run on documentation source codes, i.e. `/docs`
+
+   :::
+
+3. Run all tests
+
+   ```bash
+   npm test
+   ```
+
 Available Scripts
 -----------------
-
-### Prettier
-
-#### Format Code Using Prettier
-
-```bash
-npx prettier --write .
-```
-
-#### Watching For Changes
-
-We can have Prettier watch for changes from the command line by using our integrated [onchange][onchange]:
-
-```bash
-npm run prettier-watch
-```
-
-### ESLint
-
-#### Run Static Code Analysis Using ESLint
-
-```bash
-npx eslint .
-```
-
-:::caution
-
-ESLint currently does not run on documentation source codes, i.e. `/docs`
-
-:::
 
 ### `npm start`
 
