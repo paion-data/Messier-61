@@ -8,7 +8,7 @@ const EMAIL_MATCHER =
   /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
 
 const MATCHERS = [
-  (text: string) => {
+  (text) => {
     const match = URL_MATCHER.exec(text);
     return (
       match && {
@@ -19,7 +19,7 @@ const MATCHERS = [
       }
     );
   },
-  (text: string) => {
+  (text) => {
     const match = EMAIL_MATCHER.exec(text);
     return (
       match && {
