@@ -18,8 +18,9 @@ _**Messier-61 is under busy development for its Feb. beta release. Stay tunned.*
 > _Messier-61_ is named after the [supermassive black hole "Messier-61"][Messier-61 Wikipedia]. In the world of Physics,
 > it's the "entry" of interstellar travelling that eventually takes people to a fresh set of world-view of galaxies
 
-Messier-61 is under development phase. See its [current project planning][project planning] and
-[planned milestones][milestones] for more details on how to get involved.
+Messier-61 is under development phase. See its [current project planning](https://github.com/orgs/paion-data/projects/6)
+and [planned milestones](https://github.com/paion-data/Messier-61/milestones?direction=asc&sort=due_date&state=open) for 
+more details on how to get involved.
 
 License
 -------
