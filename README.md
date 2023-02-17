@@ -1,4 +1,3 @@
-<!-- Copyright 2023 Paion Data. All rights reserved. -->
 Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 ==========
 
