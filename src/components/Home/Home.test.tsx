@@ -20,8 +20,8 @@ test("GitHub and Help buttons point to the expected locations", () => {
   );
 
   const githubLink = screen.getByRole("link", { name: /GitHub/i });
-  expect(githubLink.getAttribute("href")).toBe('https://github.com/paion-data/Messier-61');
+  expect(githubLink.getAttribute("href")).toBe("https://github.com/paion-data/Messier-61");
 
   const helpLink = screen.getByRole("link", { name: /Help/i });
-  expect(helpLink.getAttribute("href")).toBe('https://paion-data.github.io/Messier-61/');
+  expect(helpLink.getAttribute("href")).toBe("https://paion-data.github.io/Messier-61/");
 });
