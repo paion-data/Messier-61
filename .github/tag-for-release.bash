@@ -1,4 +1,3 @@
-# Copyright 2023 Paion Data. All rights reserved.
 #!/bin/bash
 
 # Pick up the tags from the adjusted remote
