@@ -3,6 +3,10 @@
 import { render } from "@testing-library/react";
 import AutoLinkPlugin from "./AutoLinkPlugin";
 
+test("renders app without error", () => {
+  render(<AutoLinkPlugin />);
+});
+
 test("Converts a string to a url-link", () => {
   render(<AutoLinkPlugin />);
 
