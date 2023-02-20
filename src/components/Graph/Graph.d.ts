@@ -1,15 +1,15 @@
-interface Graph {
+export interface Graph {
   nodes: Node[];
   links: Link[];
 }
 
-interface Node {
+export interface Node {
   id: string;
   label: string;
   value: any;
 }
 
-interface Link {
+export interface Link {
   id: string;
   label: string;
   from: string;
