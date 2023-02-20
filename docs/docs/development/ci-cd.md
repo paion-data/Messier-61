@@ -67,6 +67,28 @@ We found that one of our CI/CD jobs broken itself without any code change on Mes
 In most cases this is not a Messier-61 issue, but an [upstream service][GitHub Packages] downtime issue. The best of
 what we can do is focusing on other priorities and come back later after the upstream fixes the issue.
 
+### Code Style Check Error
+
+![Error loading code-style-check-error.png](./img/code-style-check-error.png)
+
+Messier-61 uses [Prettier][Prettier] as code style checker. The error above indicates that Prettier found some styling
+issues. To fix those, simply run the following command at the root of Messier-61 project and re-push the code:
+
+```bash
+npx prettier --write .
+```
+
+:::info
+
+Alternatively, we can have Prettier watch for changes from the command line by using our integrated
+[onchange][onchange]:
+
+```bash
+npm run prettier-watch
+```
+
+:::
+
 [ESLint]: https://eslint.org/
 
 [GitHub Actions]: https://docusaurus.io/docs/deployment#deploying-to-github-pages
