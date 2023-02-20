@@ -18,13 +18,11 @@ test("Converts a string to a url-link", () => {
     const emailRegex =
       /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     return emailText.replace(emailRegex, (email: string) => {
-      return `<a href='${email}'>${email}</a>`;
+      return `<a href='mailto:${email}'>${email}</a>`;
     });
   };
-  const emailText = "Find me at http://www.example.com and also at http://stackoverflow.com";
+  const emailText = "Find me at some-email@example.com";
   const emailHtml = isEmail(emailText);
-  expect(emailHtml).toBe(
-    "Find me at <a href='http://www.example.com'>http://www.example.com</a> and also at <a href='http://stackoverflow.com'>http://stackoverflow.com</a>"
-  );
+  expect(emailHtml).toBe("Find me at <a href='mailto:some-email@example.com'>some-email@example.com</a>");
 });
 export {};
