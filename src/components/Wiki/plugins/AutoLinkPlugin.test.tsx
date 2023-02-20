@@ -5,7 +5,7 @@ import AutoLinkPlugin from "./AutoLinkPlugin";
 
 test("Converts a string to a url-link", () => {
   render(<AutoLinkPlugin />);
-  
+
   const urlify = (text: any) => {
     const urlRegex =
       /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
