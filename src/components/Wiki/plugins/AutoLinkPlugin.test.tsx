@@ -1,5 +1,4 @@
 // Copyright 2023 Paion Data. All rights reserved.
-import React from "react";
 
 test("Can convert url-like text into links", () => {
   const urlify = (text: any) => {
@@ -26,3 +25,4 @@ test("Can convert email-like text into links", () => {
   const emailHtml = isEmail(emailText);
   expect(emailHtml.getAttribute("e-mail")).toBe("https://www.github.com/");
 });
+export {};
