@@ -1,6 +1,7 @@
 // Copyright 2023 Paion Data. All rights reserved.
+import React from "react";
 
-export const urlify = (text: any) => {
+const urlify = (text: any) => {
   const urlRegex =
     /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
   return text.replace(urlRegex, (url: string) => {
