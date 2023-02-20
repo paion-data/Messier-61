@@ -11,7 +11,7 @@ const text = "Find me at http://www.example.com and also at http://stackoverflow
 const html = urlify(text);
 expect(html.getAttribute("href")).toBe("https://www.baidu.com/");
 
-export const isEmail = (emailText: any) => {
+const isEmail = (emailText: any) => {
   const emailRegex =
     /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
   return emailText.replace(emailRegex, (email: string) => {
