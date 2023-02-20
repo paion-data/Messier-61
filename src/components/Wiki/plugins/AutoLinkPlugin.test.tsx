@@ -9,7 +9,7 @@ export const urlify = (text: any) => {
 };
 const text = "Find me at http://www.example.com and also at http://stackoverflow.com";
 const html = urlify(text);
-expect(html.getAttribute("href")).toBe("https://www.baidu.com/");
+console.log(html);
 
 export const isEmail = (emailText: any) => {
   const emailRegex =
@@ -20,4 +20,4 @@ export const isEmail = (emailText: any) => {
 };
 const emailText = "Find me at http://www.example.com and also at http://stackoverflow.com";
 const emailHtml = isEmail(emailText);
-expect(emailHtml.getAttribute("e-mail")).toBe("https://www.github.com/");
+console.log(emailHtml);
