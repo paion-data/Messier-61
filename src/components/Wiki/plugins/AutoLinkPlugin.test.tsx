@@ -1,5 +1,4 @@
 // Copyright 2023 Paion Data. All rights reserved.
-import React from "react";
 
 test("Converts a string to a url-link", () => {
   const urlify = (text: any) => {
@@ -28,3 +27,4 @@ test("Converts a string to a url-link", () => {
     "Find me at <a href='http://www.example.com'>http://www.example.com</a> and also at <a href='http://stackoverflow.com'>http://stackoverflow.com</a>"
   );
 });
+export {};
