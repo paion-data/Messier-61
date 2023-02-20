@@ -20,7 +20,7 @@ const MATCHERS = [
       }
     );
   },
-  (text: string):any => {
+  (text: string): any => {
     const match = EMAIL_MATCHER.exec(text);
     return (
       match != null && {
