@@ -12,7 +12,7 @@ const MATCHERS = [
   (text: string) => {
     const match = URL_MATCHER.exec(text);
     return (
-      match && {
+      match != null && {
         index: match.index,
         length: match[0].length,
         text: match[0],
@@ -23,7 +23,7 @@ const MATCHERS = [
   (text: string) => {
     const match = EMAIL_MATCHER.exec(text);
     return (
-      match && {
+      match != null && {
         index: match.index,
         length: match[0].length,
         text: match[0],
