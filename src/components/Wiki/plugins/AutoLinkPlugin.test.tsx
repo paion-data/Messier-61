@@ -1,10 +1,8 @@
 // Copyright 2023 Paion Data. All rights reserved.
-
-test("Converts a string to a url-link", () => {
+import { URL_MATCHER, EMAIL_MATCHER } from "./AutoLinkPlugin";
+test("Auto attach link to URL and email", () => {
   const urlify = (text: any) => {
-    const urlRegex =
-      /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
-    return text.replace(urlRegex, (url: string) => {
+    return text.replace(URL_MATCHER, (url: string) => {
       return `<a href='${url}'>${url}</a>`;
     });
   };
@@ -15,9 +13,7 @@ test("Converts a string to a url-link", () => {
   );
 
   const isEmail = (emailText: any) => {
-    const emailRegex =
-      /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-    return emailText.replace(emailRegex, (email: string) => {
+    return emailText.replace(EMAIL_MATCHER, (email: string) => {
       return `<a href='mailto:${email}'>${email}</a>`;
     });
   };
@@ -25,4 +21,3 @@ test("Converts a string to a url-link", () => {
   const emailHtml = isEmail(emailText);
   expect(emailHtml).toBe("Find me at <a href='mailto:some-email@example.com'>some-email@example.com</a>");
 });
-export {};
