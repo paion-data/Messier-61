@@ -1,3 +1,11 @@
+---
+id: "index"
+title: "@paiondata/messier-61"
+sidebar_label: "Readme"
+sidebar_position: 0
+custom_edit_url: null
+---
+
 Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 ==========
 
