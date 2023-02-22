@@ -1,7 +1,7 @@
 // Copyright 2023 Paion Data. All rights reserved.
 import { URL_MATCHER, EMAIL_MATCHER } from "./AutoLinkPlugin";
 test("Auto attach link to URL and email", () => {
-  const urlify = (text: any) => {
+  const urlify = (text: string): string => {
     return text.replace(URL_MATCHER, (url: string) => {
       return `<a href='${url}'>${url}</a>`;
     });
@@ -12,7 +12,7 @@ test("Auto attach link to URL and email", () => {
     "Find me at <a href='http://www.example.com'>http://www.example.com</a> and also at <a href='http://stackoverflow.com'>http://stackoverflow.com</a>"
   );
 
-  const isEmail = (emailText: any) => {
+  const isEmail = (emailText: string): string => {
     return emailText.replace(EMAIL_MATCHER, (email: string) => {
       return `<a href='mailto:${email}'>${email}</a>`;
     });

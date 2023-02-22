@@ -33,6 +33,6 @@ const MATCHERS = [
   },
 ];
 
-export function UrlEmailAutoLinkPlugin() {
+export function UrlEmailAutoLinkPlugin(): JSX.Element {
   return <AutoLinkPlugin matchers={MATCHERS} />;
 }
