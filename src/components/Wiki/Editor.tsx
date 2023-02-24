@@ -8,6 +8,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
+import GraphPlugin from "./plugins/GraphPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
@@ -18,13 +19,8 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { TRANSFORMERS } from "@lexical/markdown";
-
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import { UrlEmailAutoLinkPlugin } from "./plugins/UrlEmailAutoLinkPlugin";
-
-function Placeholder(): JSX.Element {
-  return <div className="editor-placeholder">Enter some rich text...</div>;
-}
 
 const editorConfig = {
   namespace: "Messier-61",
@@ -61,6 +57,8 @@ export default function Editor(): JSX.Element {
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />
+
+          <GraphPlugin />
           <HistoryPlugin />
           <TreeViewPlugin />
           <AutoFocusPlugin />
@@ -73,4 +71,14 @@ export default function Editor(): JSX.Element {
       </div>
     </LexicalComposer>
   );
+}
+
+/**
+ * submitting Editor as input
+ *
+ * @param x users input text.
+ * @returns text render in editor.
+ */
+function Placeholder(): JSX.Element {
+  return <div className="editor-placeholder">Enter some rich text...</div>;
 }
