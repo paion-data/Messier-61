@@ -1,5 +1,5 @@
 // Copyright 2023 Paion Data. All rights reserved.
-import { URL_MATCHER, EMAIL_MATCHER } from "./AutoLinkPlugin";
+import { URL_MATCHER, EMAIL_MATCHER } from "./UrlEmailAutoLinkPlugin";
 test("Auto attach link to URL and email", () => {
   const urlify = (text: string): string => {
     return text.replace(URL_MATCHER, (url: string) => {
