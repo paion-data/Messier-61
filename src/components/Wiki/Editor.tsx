@@ -20,7 +20,7 @@ import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPl
 import { TRANSFORMERS } from "@lexical/markdown";
 
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
-import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
+import { UrlEmailAutoLinkPlugin } from "./plugins/UrlEmailAutoLinkPlugin";
 
 function Placeholder(): JSX.Element {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -66,7 +66,7 @@ export default function Editor(): JSX.Element {
           <AutoFocusPlugin />
           <ListPlugin />
           <LinkPlugin />
-          <AutoLinkPlugin />
+          <UrlEmailAutoLinkPlugin />
           <ListMaxIndentLevelPlugin maxDepth={7} />
           <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
         </div>
