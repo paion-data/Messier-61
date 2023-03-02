@@ -1,0 +1,300 @@
+{
+	"id": 0,
+	"name": "@paiondata/messier-61",
+	"kind": 1,
+	"kindString": "Project",
+	"flags": {},
+	"originalName": "",
+	"children": [
+		{
+			"id": 1,
+			"name": "Graph",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "A Graph is an abstract data type that is meant to implement the Knowledge Graph (both directed and undirected)\nconcept from the field of graph theory within mathematics.\n\nA knowledge graph is a directed labeled graph in which the labels have well-defined meanings. A directed labeled\ngraph consists of nodes, edges, and labels. Anything can act as a node, for example, people, company, computer, etc.\nAn edge connects a pair of nodes and captures the relationship of interest between them, for example, friendship\nrelationship between two people, customer relationship between a company and person, or a network connection between\ntwo computers. The labels capture the meaning of the relationship, for example, the friendship relationship between\ntwo people."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 3,
+					"name": "links",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 15,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L15"
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reference",
+							"id": 7,
+							"name": "Link"
+						}
+					}
+				},
+				{
+					"id": 2,
+					"name": "nodes",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 14,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L14"
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reference",
+							"id": 4,
+							"name": "Node"
+						}
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						3,
+						2
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "Graph.d.ts",
+					"line": 13,
+					"character": 17,
+					"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L13"
+				}
+			]
+		},
+		{
+			"id": 7,
+			"name": "Link",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {},
+			"children": [
+				{
+					"id": 8,
+					"name": "id",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Surrogate key"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 33,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L33"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 9,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 34,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L34"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 10,
+					"name": "source",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 35,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L35"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 11,
+					"name": "target",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 36,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L36"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						8,
+						9,
+						10,
+						11
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "Graph.d.ts",
+					"line": 29,
+					"character": 17,
+					"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L29"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"name": "Node",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "A node has a unique identifier"
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 5,
+					"name": "id",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Surrogate key"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 25,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L25"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 6,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 26,
+							"character": 2,
+							"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L26"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						5,
+						6
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "Graph.d.ts",
+					"line": 21,
+					"character": 17,
+					"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L21"
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Interfaces",
+			"children": [
+				1,
+				7,
+				4
+			]
+		}
+	],
+	"sources": [
+		{
+			"fileName": "Graph.d.ts",
+			"line": 13,
+			"character": 0,
+			"url": "https://github.com/paion-data/Messier-61/blob/3284e15/src/components/Graph/Graph.d.ts#L13"
+		}
+	]
+}
