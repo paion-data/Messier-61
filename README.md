@@ -2,7 +2,7 @@ Messier-61 <sup>![Node Version Badge is Missing][node version badge]</sup>
 ==========
 
 <div align="center">
-<img src="docs/static/img/logo.svg" width="200px">
+<img src="docs/static/img/logo.svg" width="200px" />
 </div>
 
 [![npm registry][npm registry]](https://www.npmjs.com/package/@paiondata/messier-61)
@@ -21,6 +21,10 @@ _**Messier-61 is under busy development for its Feb. beta release. Stay tunned.*
 Messier-61 is under development phase. See its [current project planning](https://github.com/orgs/paion-data/projects/6)
 and [planned milestones](https://github.com/paion-data/Messier-61/milestones?direction=asc&sort=due_date&state=open) for
 more details on how to get involved.
+
+We've been intrigued by this question of whether we can evolve or develop an external brain, a brain that through data,
+can give us seamless access and easy access to meta information or information that may exists somewhere that may be
+relevant to help us make the right decision about anything.
 
 License
 -------

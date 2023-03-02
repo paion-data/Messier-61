@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Copyright 2023 Paion Data. All rights reserved.
+
 # Pick up the tags from the adjusted remote
 git fetch --tags
 
