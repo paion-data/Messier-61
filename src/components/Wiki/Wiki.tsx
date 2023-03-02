@@ -2,6 +2,7 @@
 import React from "react";
 import "./Wiki.css";
 import Editor from "./Editor";
+import { D3Graph } from "../Graph/D3Graph/D3Graph";
 
 export default function App(): JSX.Element {
   return (

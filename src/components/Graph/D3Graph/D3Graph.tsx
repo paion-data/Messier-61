@@ -5,6 +5,11 @@ import * as d3 from "d3";
 import { drag } from "d3";
 import styles from "./D3Graph.module.css";
 
+/**
+ * Encapsulate the margin value of the D3 graph
+ *
+ * @type {Margin} top, bottom, left and right margins of the svg
+ */
 export interface Margin {
   top: number;
   bottom: number;
@@ -13,16 +18,27 @@ export interface Margin {
 }
 
 /**
- * D3 做图组件
+ * Incoming D3 data
  *
- * @param props 图的原始数据
- *  
- * @returns 一张 D3 只是替图谱
+ * @param nodes A list of object containting info about all vertices of graph
+ *
+ * @param links A list of object containting info about all links of graph
+ *
+ * @returns A D3 graph component
  */
 export function D3Graph(props: Graph): JSX.Element {
   return generateD3Graph(props);
 }
 
+/**
+ * D3 graph component
+ *
+ * @param nodes A list of object containting info about all vertices of graph
+ *
+ * @param links A list of object containting info about all links of graph
+ *
+ * @returns A D3 visualization whose data is defined by nodes & links
+ */
 export function generateD3Graph(props: Graph): JSX.Element {
   const svgRef = React.useRef(null);
   const margin = { top: 10, right: 30, bottom: 30, left: 40 };
@@ -90,6 +106,19 @@ export function generateD3Graph(props: Graph): JSX.Element {
   return <svg ref={svgRef} width={width} height={height} />;
 }
 
+/**
+ * Define svg style
+ *
+ * @param selector A string that conforms to the W3C selector, which is how elements are selected in a css document
+ *
+ * @param margin the margin of the svg
+ *
+ * @param width the width of the svg
+ *
+ * @param height the height of the svg
+ *
+ * @returns A D3 graph with defined dimensions
+ */
 export function attachSvgTo(selector: any, margin: Margin, width: number, height: number): any {
   const svg = d3
     .select(selector)
@@ -115,6 +144,15 @@ export function initializeNode(svg: any, props: Graph): any {
     .call(drag);
 }
 
+/**
+ * Visual node text
+ *
+ * @param svg A D3 visualization whose data is defined by nodes & links
+ *
+ * @param nodes A list of object containting info about all vertices of graph
+ *
+ * @returns A node with text
+ */
 function generateNodeText(svg: any, props: Graph): any {
   return svg
     .selectAll("text")
@@ -130,28 +168,32 @@ function generateNodeText(svg: any, props: Graph): any {
     });
 }
 
+/**
+ * Generating line
+ *
+ * @param svg A D3 visualization whose data is defined by nodes & links
+ *
+ * @param links A list of object containting info about all line of graph
+ *
+ * @returns A line connect two nodes
+ */
 export function initializeLinks(svg: any, props: Graph): any {
-  return (
-    svg
-      .selectAll("line")
-      .data(getAllLinks(props.links))
-      .enter()
-      .append("line")
-      // .attr("d", (d: { from: { x: string; y: string }; to: { x: string; y: string } }): any => {
-      //   return d != null && "M " + d.from.x + " " + d.from.y + " L " + d.to.x + " " + d.to.y;
-      // })
-      // .attr("id", (d: any, i: string) => {
-      //   return i != null && "edgepath" + i;
-      // })
-      // .attr("marker-end", "url(#arrow)")
-      .style("stroke", "#aaa")
-  );
+  return svg.selectAll("line").data(getAllLinks(props.links)).enter().append("line").style("stroke", "#aaa");
 }
 
+/**
+ * Visual line text
+ *
+ * @param svg A D3 visualization whose data is defined by nodes & links
+ *
+ * @param links A list of object containting info about all line of graph
+ *
+ * @returns A line with text
+ */
 function generateEdgesText(svg: any, props: any): any {
   return svg
     .selectAll(".edgelabel")
-    .data(getAllLinks(props))
+    .data(getAllLinks(props.links))
     .enter()
     .append("text")
     .attr("class", "edgelabel")
@@ -159,10 +201,24 @@ function generateEdgesText(svg: any, props: any): any {
     .attr("dy", 0);
 }
 
+/**
+ * Get all the vertices
+ *
+ * @param Node[] A list of all vertices received
+ *
+ * @returns An array of all vertices in json form
+ */
 export function getAllNodes(inputNodes: Node[]): any[] {
   return inputNodes;
 }
 
+/**
+ * Get all the links
+ *
+ * @param Link[] A list of all links received
+ *
+ * @returns An array of all links in json form
+ */
 export function getAllLinks(inputLinks: Link[]): any[] {
   return inputLinks;
 }
