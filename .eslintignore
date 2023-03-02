@@ -2,6 +2,7 @@
 docs/**
 build/**
 
+src/messier-61-env.d.ts
 src/components/Wiki/plugins/ListMaxIndentLevelPlugin.js
 src/components/Wiki/plugins/Messier61GraphPlugin.tsx
 src/components/Wiki/plugins/ToolbarPlugin.js
