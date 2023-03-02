@@ -19,8 +19,23 @@ here you'll find what documentation we do have. To make it easier to find the he
 documentation down into a few categories, but if you can't find what you're looking for, please don't hesitate to
 [create an issue][create issue]
 
+[Messier-61's documentation][documentation] is written using [Docusaurus][Docusaurus] and is hosted on
+[GitHub Packages][GitHub Packages]. The documentation source code is located at [/docs][documentation source] directory.
+You can find everything about using Messier-61, including how to start an instance of it, troubleshooting, and
+architecture overview.
+
+In addition, to make development of Messier-61 a better experience, we've also documented our internal components using
+TypeDoc. Developers of Messier-61 can find useful info at our
+[API documentation page](https://paion-data.github.io/Messier-61/api).
+
 If you're looking for documentation relating to [contributing to Messier-61][paion CONTRIBUTING guide], more information
 can be found at [Paion Open Source Guide][paion open source guide].
+
+[documentation source]: https://github.com/paion-data/Messier-61/tree/master/docs
+[documentation]: https://paion-data.github.io/Messier-61/
+[documentation on API]: https://paion-data.github.io/Messier-61/api
+[Docusaurus]: https://docusaurus.io/
+[Docusaurus Build]: https://docusaurus.io/docs/cli#docusaurus-build-sitedir
 
 [paion CONTRIBUTING guide]: https://github.com/paion-data/.github/blob/master/CONTRIBUTING.md
 [paion open source guide]: https://paion-data.github.io/opensource.guide/

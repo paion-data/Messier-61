@@ -57,10 +57,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
-          cache-dependency-path: "./docs/package-lock.json"
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Install Messier-61 dependencies so that TypeDoc process source files properly
+        run: |
+          cd ../
+          npm install
+      - name: Install doc dependencies
+        run: yarn install
       - name: Build documentation
         run: yarn build
       - name: Deploy to GitHub Pages

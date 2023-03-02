@@ -1,8 +1,9 @@
-<!-- Copyright 2023 Paion Data. All rights reserved. -->
 ---
 sidebar_position: 1
 title: Getting Started
 ---
+
+<!-- Copyright 2023 Paion Data. All rights reserved. -->
 
 Before committing your code, please run the following checks locally in order to give ourselves better confidence that
 the code will pass the automated checks online:
