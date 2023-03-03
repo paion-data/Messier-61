@@ -44,6 +44,28 @@ export interface Margin {
   left: number;
 }
 
+export interface CanvasConfig {
+  /**
+   * The {@link Margin margin} of the canvas.
+   */
+  margin: Margin;
+
+  /**
+   * The canvas width.
+   */
+  width: number;
+
+  /**
+   * The canvas height.
+   */
+  height: number;
+}
+
+export interface GraphConfig {
+  graphData: Graph;
+  canvasConfig: CanvasConfig
+}
+
 /**
  * Generates a D3 graph whose content is defined by a provided {@link Graph graph data}.
  *
@@ -51,8 +73,8 @@ export interface Margin {
  *
  * @returns A D3 visualization of network graph
  */
-export function D3Graph(graphData: Graph, canvasConfig: CanvasConfig): JSX.Element {
-  return generateD3Graph(graphData, canvasConfig);
+export function D3Graph(props: GraphConfig): JSX.Element {
+  return generateD3Graph(props.graphData, props.canvasConfig);
 }
 
 /**
@@ -64,7 +86,7 @@ export function D3Graph(graphData: Graph, canvasConfig: CanvasConfig): JSX.Eleme
  *
  * @returns A D3 visualization whose data is defined by nodes & links
  */
-export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.Element {
+export function generateD3Graph(props: Graph,canvasConfig: CanvasConfig): JSX.Element {
   const svgRef = React.useRef(null);
   const margin = canvasConfig.margin;
   const width = canvasConfig.width - margin.left - margin.right;
@@ -127,6 +149,7 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
         return d.y - 6;
       });
   }
+
 
   return <svg ref={svgRef} width={width} height={height} />;
 }

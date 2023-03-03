@@ -1,6 +1,6 @@
 // Copyright 2023 Paion Data. All rights reserved.
 import * as d3 from "d3";
-import { getAllNodes, attachSvgTo } from "./D3Graph";
+import { getAllNodes, attachSvgTo, CanvasConfig } from "./D3Graph";
 import type { Margin } from "./D3Graph";
 import type { Node, Link } from "../Graph";
 
@@ -12,7 +12,13 @@ test("test svg width and height", () => {
     left: 0,
   };
 
-  const actualSvg = attachSvgTo("body", svgMargin, 3, 3);
+  const canvasConfig: CanvasConfig = {
+    margin: svgMargin,
+    width: 3,
+    height: 3
+  }
+
+  const actualSvg = attachSvgTo("body", canvasConfig.margin, canvasConfig.width, canvasConfig.height);
 
   expect(actualSvg).not.toBeNull();
 
