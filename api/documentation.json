@@ -13,7 +13,144 @@
 			"flags": {},
 			"children": [
 				{
-					"id": 40,
+					"id": 42,
+					"name": "CanvasConfig",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "A CanvasConfig describes the whole layout of a rendered D3 graph.\n\nThe canvas config contains the following attributes:\n\n- "
+							},
+							{
+								"kind": "inline-tag",
+								"tag": "@link",
+								"text": "Margin",
+								"target": 46
+							},
+							{
+								"kind": "text",
+								"text": "\n- Canvas width\n- Canvas height\n\nNote that it is not guaranteed that the graph will occupy the entire canvas width or height. It does, however,\nguarantees the entire graph will fit inside the canvas"
+							}
+						]
+					},
+					"children": [
+						{
+							"id": 45,
+							"name": "height",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The canvas height."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 32,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L32"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 43,
+							"name": "margin",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The "
+									},
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "margin",
+										"target": 46
+									},
+									{
+										"kind": "text",
+										"text": " of the canvas."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 22,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L22"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 46,
+								"name": "Margin"
+							}
+						},
+						{
+							"id": 44,
+							"name": "width",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The canvas width."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 27,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L27"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								45,
+								43,
+								44
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 18,
+							"character": 17,
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L18"
+						}
+					]
+				},
+				{
+					"id": 46,
 					"name": "Margin",
 					"kind": 256,
 					"kindString": "Interface",
@@ -28,7 +165,7 @@
 					},
 					"children": [
 						{
-							"id": 42,
+							"id": 48,
 							"name": "bottom",
 							"kind": 1024,
 							"kindString": "Property",
@@ -36,9 +173,9 @@
 							"sources": [
 								{
 									"fileName": "D3Graph/D3Graph.tsx",
-									"line": 14,
+									"line": 42,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L14"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L42"
 								}
 							],
 							"type": {
@@ -47,7 +184,7 @@
 							}
 						},
 						{
-							"id": 44,
+							"id": 50,
 							"name": "left",
 							"kind": 1024,
 							"kindString": "Property",
@@ -55,9 +192,9 @@
 							"sources": [
 								{
 									"fileName": "D3Graph/D3Graph.tsx",
-									"line": 16,
+									"line": 44,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L16"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L44"
 								}
 							],
 							"type": {
@@ -66,7 +203,7 @@
 							}
 						},
 						{
-							"id": 43,
+							"id": 49,
 							"name": "right",
 							"kind": 1024,
 							"kindString": "Property",
@@ -74,9 +211,9 @@
 							"sources": [
 								{
 									"fileName": "D3Graph/D3Graph.tsx",
-									"line": 15,
+									"line": 43,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L15"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L43"
 								}
 							],
 							"type": {
@@ -85,7 +222,7 @@
 							}
 						},
 						{
-							"id": 41,
+							"id": 47,
 							"name": "top",
 							"kind": 1024,
 							"kindString": "Property",
@@ -93,9 +230,9 @@
 							"sources": [
 								{
 									"fileName": "D3Graph/D3Graph.tsx",
-									"line": 13,
+									"line": 41,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L13"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L41"
 								}
 							],
 							"type": {
@@ -108,19 +245,19 @@
 						{
 							"title": "Properties",
 							"children": [
-								42,
-								44,
-								43,
-								41
+								48,
+								50,
+								49,
+								47
 							]
 						}
 					],
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 12,
+							"line": 40,
 							"character": 17,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L12"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L40"
 						}
 					]
 				},
@@ -133,9 +270,9 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 26,
+							"line": 54,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L26"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L54"
 						}
 					],
 					"signatures": [
@@ -177,42 +314,26 @@
 							"parameters": [
 								{
 									"id": 16,
-									"name": "props",
+									"name": "graphData",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
-									"comment": {
-										"summary": [
-											{
-												"kind": "text",
-												"text": "An object containing a list of "
-											},
-											{
-												"kind": "inline-tag",
-												"tag": "@link",
-												"text": "Graph. Node",
-												"target": 13
-											},
-											{
-												"kind": "text",
-												"text": "'s and list of "
-											},
-											{
-												"kind": "inline-tag",
-												"tag": "@link",
-												"text": "Graph. Link",
-												"target": 13
-											},
-											{
-												"kind": "text",
-												"text": "'s"
-											}
-										]
-									},
 									"type": {
 										"type": "reference",
 										"id": 2,
 										"name": "Graph"
+									}
+								},
+								{
+									"id": 17,
+									"name": "canvasConfig",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 42,
+										"name": "CanvasConfig"
 									}
 								}
 							],
@@ -226,7 +347,7 @@
 					]
 				},
 				{
-					"id": 20,
+					"id": 22,
 					"name": "attachSvgTo",
 					"kind": 64,
 					"kindString": "Function",
@@ -234,14 +355,14 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 119,
+							"line": 147,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L119"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L147"
 						}
 					],
 					"signatures": [
 						{
-							"id": 21,
+							"id": 23,
 							"name": "attachSvgTo",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -267,7 +388,7 @@
 							},
 							"parameters": [
 								{
-									"id": 22,
+									"id": 24,
 									"name": "selector",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -286,7 +407,7 @@
 									}
 								},
 								{
-									"id": 23,
+									"id": 25,
 									"name": "margin",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -301,12 +422,12 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 40,
+										"id": 46,
 										"name": "Margin"
 									}
 								},
 								{
-									"id": 24,
+									"id": 26,
 									"name": "width",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -325,7 +446,7 @@
 									}
 								},
 								{
-									"id": 25,
+									"id": 27,
 									"name": "height",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -352,7 +473,7 @@
 					]
 				},
 				{
-					"id": 17,
+					"id": 18,
 					"name": "generateD3Graph",
 					"kind": 64,
 					"kindString": "Function",
@@ -360,14 +481,14 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 39,
+							"line": 67,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L39"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L67"
 						}
 					],
 					"signatures": [
 						{
-							"id": 18,
+							"id": 19,
 							"name": "generateD3Graph",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -393,7 +514,7 @@
 							},
 							"parameters": [
 								{
-									"id": 19,
+									"id": 20,
 									"name": "props",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -402,6 +523,18 @@
 										"type": "reference",
 										"id": 2,
 										"name": "Graph"
+									}
+								},
+								{
+									"id": 21,
+									"name": "canvasConfig",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 42,
+										"name": "CanvasConfig"
 									}
 								}
 							],
@@ -415,7 +548,7 @@
 					]
 				},
 				{
-					"id": 37,
+					"id": 39,
 					"name": "getAllLinks",
 					"kind": 64,
 					"kindString": "Function",
@@ -423,14 +556,14 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 225,
+							"line": 253,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L225"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L253"
 						}
 					],
 					"signatures": [
 						{
-							"id": 38,
+							"id": 40,
 							"name": "getAllLinks",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -466,7 +599,7 @@
 							},
 							"parameters": [
 								{
-									"id": 39,
+									"id": 41,
 									"name": "inputLinks",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -500,7 +633,7 @@
 					]
 				},
 				{
-					"id": 34,
+					"id": 36,
 					"name": "getAllNodes",
 					"kind": 64,
 					"kindString": "Function",
@@ -508,14 +641,14 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 207,
+							"line": 235,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L207"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L235"
 						}
 					],
 					"signatures": [
 						{
-							"id": 35,
+							"id": 37,
 							"name": "getAllNodes",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -551,7 +684,7 @@
 							},
 							"parameters": [
 								{
-									"id": 36,
+									"id": 38,
 									"name": "inputNodes",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -585,7 +718,7 @@
 					]
 				},
 				{
-					"id": 30,
+					"id": 32,
 					"name": "initializeLinks",
 					"kind": 64,
 					"kindString": "Function",
@@ -593,14 +726,14 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 176,
+							"line": 204,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L176"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L204"
 						}
 					],
 					"signatures": [
 						{
-							"id": 31,
+							"id": 33,
 							"name": "initializeLinks",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -626,7 +759,7 @@
 							},
 							"parameters": [
 								{
-									"id": 32,
+									"id": 34,
 									"name": "svg",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -645,7 +778,7 @@
 									}
 								},
 								{
-									"id": 33,
+									"id": 35,
 									"name": "props",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -665,7 +798,7 @@
 					]
 				},
 				{
-					"id": 26,
+					"id": 28,
 					"name": "initializeNode",
 					"kind": 64,
 					"kindString": "Function",
@@ -673,21 +806,21 @@
 					"sources": [
 						{
 							"fileName": "D3Graph/D3Graph.tsx",
-							"line": 130,
+							"line": 158,
 							"character": 16,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L130"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L158"
 						}
 					],
 					"signatures": [
 						{
-							"id": 27,
+							"id": 29,
 							"name": "initializeNode",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 28,
+									"id": 30,
 									"name": "svg",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -698,7 +831,7 @@
 									}
 								},
 								{
-									"id": 29,
+									"id": 31,
 									"name": "props",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -722,19 +855,20 @@
 				{
 					"title": "Interfaces",
 					"children": [
-						40
+						42,
+						46
 					]
 				},
 				{
 					"title": "Functions",
 					"children": [
 						14,
-						20,
-						17,
-						37,
-						34,
-						30,
-						26
+						22,
+						18,
+						39,
+						36,
+						32,
+						28
 					]
 				}
 			],
@@ -743,7 +877,7 @@
 					"fileName": "D3Graph/D3Graph.tsx",
 					"line": 2,
 					"character": 0,
-					"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L2"
+					"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/D3Graph/D3Graph.tsx#L2"
 				}
 			]
 		},
@@ -780,7 +914,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 15,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L15"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L15"
 								}
 							],
 							"type": {
@@ -803,7 +937,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 14,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L14"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L14"
 								}
 							],
 							"type": {
@@ -830,7 +964,7 @@
 							"fileName": "Graph.d.ts",
 							"line": 13,
 							"character": 17,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L13"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L13"
 						}
 					]
 				},
@@ -860,7 +994,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 33,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L33"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L33"
 								}
 							],
 							"type": {
@@ -879,7 +1013,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 34,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L34"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L34"
 								}
 							],
 							"type": {
@@ -898,7 +1032,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 35,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L35"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L35"
 								}
 							],
 							"type": {
@@ -917,7 +1051,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 36,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L36"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L36"
 								}
 							],
 							"type": {
@@ -942,7 +1076,7 @@
 							"fileName": "Graph.d.ts",
 							"line": 29,
 							"character": 17,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L29"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L29"
 						}
 					]
 				},
@@ -980,7 +1114,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 25,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L25"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L25"
 								}
 							],
 							"type": {
@@ -999,7 +1133,7 @@
 									"fileName": "Graph.d.ts",
 									"line": 26,
 									"character": 2,
-									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L26"
+									"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L26"
 								}
 							],
 							"type": {
@@ -1022,7 +1156,7 @@
 							"fileName": "Graph.d.ts",
 							"line": 21,
 							"character": 17,
-							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L21"
+							"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L21"
 						}
 					]
 				}
@@ -1042,7 +1176,7 @@
 					"fileName": "Graph.d.ts",
 					"line": 13,
 					"character": 0,
-					"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L13"
+					"url": "https://github.com/paion-data/Messier-61/blob/3b8fcb8/src/components/Graph/Graph.d.ts#L13"
 				}
 			]
 		}
