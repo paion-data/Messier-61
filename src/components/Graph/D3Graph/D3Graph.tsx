@@ -18,13 +18,11 @@ export interface Margin {
 }
 
 /**
- * Incoming D3 data
+ * Generates a D3 graph whose content is defined by a provided {@link Graph graph data}.
  *
- * @param nodes A list of object containting info about all vertices of graph
+ * @param props An object containing a list of {@link Graph. Node}'s and list of {@link Graph. Link}'s
  *
- * @param links A list of object containting info about all links of graph
- *
- * @returns A D3 graph component
+ * @returns A D3 visualization of network graph
  */
 export function D3Graph(props: Graph): JSX.Element {
   return generateD3Graph(props);
@@ -81,17 +79,17 @@ export function generateD3Graph(props: Graph): JSX.Element {
 
   function ticked(): any {
     link
-      .attr("x1", function (d: { from: { x: any } }) {
-        return d.from.x;
+      .attr("x1", function (d: { source: { x: any } }) {
+        return d.source.x;
       })
-      .attr("y1", function (d: { from: { y: any } }) {
-        return d.from.y;
+      .attr("y1", function (d: { source: { y: any } }) {
+        return d.source.y;
       })
-      .attr("x2", function (d: { to: { x: any } }) {
-        return d.to.x;
+      .attr("x2", function (d: { target: { x: any } }) {
+        return d.target.x;
       })
-      .attr("y2", function (d: { to: { y: any } }) {
-        return d.to.y;
+      .attr("y2", function (d: { target: { y: any } }) {
+        return d.target.y;
       });
 
     node
@@ -140,8 +138,7 @@ export function initializeNode(svg: any, props: Graph): any {
     .style("fill", "#69B3A2")
     .on("click", (node: any) => {
       console.log("click");
-    })
-    .call(drag);
+    });
 }
 
 /**
@@ -202,22 +199,29 @@ function generateEdgesText(svg: any, props: any): any {
 }
 
 /**
- * Get all the vertices
+ * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
  *
- * @param Node[] A list of all vertices received
+ * @param inputNodes The list of all node objects in Messier-61 format
  *
- * @returns An array of all vertices in json form
+ * @returns a list of D3 force-graph nodes
  */
 export function getAllNodes(inputNodes: Node[]): any[] {
   return inputNodes;
 }
 
 /**
- * Get all the links
+ * Converts a list of {@link Graph. Link}'s to D3-compatible links.
  *
- * @param Link[] A list of all links received
+ * Each of the returned links promises to have the following attributes:
  *
- * @returns An array of all links in json form
+ * - source
+ * - target
+ *
+ * Note that each link might contain other attributes, which D3 doesn't need for its own good
+ *
+ * @param inputLinks The list of all link objects in Messier-61 format
+ *
+ * @returns a list of D3 force-graph links
  */
 export function getAllLinks(inputLinks: Link[]): any[] {
   return inputLinks;
