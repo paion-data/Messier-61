@@ -39,8 +39,8 @@ export function D3Graph(props: Graph): JSX.Element {
 export function generateD3Graph(props: Graph): JSX.Element {
   const svgRef = React.useRef(null);
   const margin = { top: 10, right: 30, bottom: 30, left: 40 };
-  const width = Number( styles.svgWidth ) - margin.left - margin.right;
-  const height = Number( styles.svgHeight ) - margin.top - margin.bottom;
+  const width = Number(styles.svgWidth) - margin.left - margin.right;
+  const height = Number(styles.svgHeight) - margin.top - margin.bottom;
   const svg = attachSvgTo(svgRef.current, margin, width, height);
 
   const link = initializeLinks(svg, props);
