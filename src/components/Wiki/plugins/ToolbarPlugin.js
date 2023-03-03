@@ -2,7 +2,6 @@
 import React from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-// import DropDown, {DropDownItem} from '../../ui/DropDowm';
 import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
@@ -17,7 +16,7 @@ import {
   $getNodeByKey,
 } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { $isParentElementRTL, $wrapNodes, $isAtNodeEnd } from "@lexical/selection";
+import { $isParentElementRTL, $wrapNodes, $isAtNodeEnd, $getSelectionStyleValueForProperty, $patchStyleText } from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import {
   INSERT_ORDERED_LIST_COMMAND,
@@ -47,28 +46,6 @@ const blockTypeToBlockName = {
   ul: "Bulleted List",
 };
 
-const FONT_FAMILY_OPTIONS = [
-  ['Arial', 'Arial'],
-  ['Courier New', 'Courier New'],
-  ['Georgia', 'Georgia'],
-  ['Times New Roman', 'Times New Roman'],
-  ['Trebuchet MS', 'Trebuchet MS'],
-  ['Verdana', 'Verdana'],
-];
-
-const FONT_SIZE_OPTIONS = [
-  ['10px', '10px'],
-  ['11px', '11px'],
-  ['12px', '12px'],
-  ['13px', '13px'],
-  ['14px', '14px'],
-  ['15px', '15px'],
-  ['16px', '16px'],
-  ['17px', '17px'],
-  ['18px', '18px'],
-  ['19px', '19px'],
-  ['20px', '20px'],
-];
 function Divider() {
   return <div className="divider" />;
 }
@@ -412,56 +389,6 @@ function BlockOptionsDropdownList({ editor, blockType, toolbarRef, setShowBlockO
   );
 }
 
-function FontDropDown({
-  editor,
-  value,
-  style,
-  disabled = false,
-}){
-  const handleClick = useCallback(
-    (option) => {
-      editor.update(() => {
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-          $patchStyleText(selection, {
-            [style]: option,
-          });
-        }
-      });
-    },
-    [editor, style],
-  );
-
-  const buttonAriaLabel =
-    style === 'font-family'
-      ? 'Formatting options for font family'
-      : 'Formatting options for font size';
-
-  // return (
-    // <DropDown
-    //   disabled={disabled}
-    //   buttonClassName={'toolbar-item ' + style}
-    //   buttonLabel={value}
-    //   buttonIconClassName={
-    //     style === 'font-family' ? 'icon block-type font-family' : ''
-    //   }
-    //   buttonAriaLabel={buttonAriaLabel}>
-    //   {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
-    //     ([option, text]) => (
-    //       <DropDownItem
-    //         className={`item ${dropDownActiveClass(value === option)} ${
-    //           style === 'font-size' ? 'fontsize-item' : ''
-    //         }`}
-    //         onClick={() => handleClick(option)}
-    //         key={option}>
-    //         <span className="text">{text}</span>
-    //       </DropDownItem>
-    //     ),
-    //   )}
-    // </DropDown>
-  // );
-}
-
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -478,7 +405,8 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
-  const [fontFamily, setFontFamily] = useState<string>('Arial');
+  const [fontFamily, setFontFamily] = useState('Arial');
+  const [fontSize, setFontSize] = useState('15px');
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -501,7 +429,6 @@ export default function ToolbarPlugin() {
           }
         }
       }
-
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
@@ -519,12 +446,13 @@ export default function ToolbarPlugin() {
         setIsLink(false);
       }
     }
-  }, [editor]);
-
-      // Handle buttons
+    setFontSize(
+        $getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
+      );
       setFontFamily(
         $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
       );
+  }, [editor]);
 
   useEffect(() => {
     return mergeRegister(
@@ -583,6 +511,31 @@ export default function ToolbarPlugin() {
     }
   }, [editor, isLink]);
 
+  const applyStyleText = useCallback(
+    (styles) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, styles);
+        }
+      });
+    },
+    [editor],
+  );
+  const onFontSizeSelect = useCallback(
+    (e) => {
+      applyStyleText({'font-size': e.target.value});
+    },
+    [applyStyleText],
+  );
+
+  const onFontFamilySelect = useCallback(
+    (e) => {
+      applyStyleText({'font-family': e.target.value});
+    },
+    [applyStyleText],
+  );
+  
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -642,27 +595,43 @@ export default function ToolbarPlugin() {
         </>
       ) : (
         <>
-    <DropDown
-      disabled={disabled}
-      buttonClassName={'toolbar-item ' + style}
-      buttonLabel={value}
-      buttonIconClassName={
-        style === 'font-family' ? 'icon block-type font-family' : ''
-      }
-      buttonAriaLabel={buttonAriaLabel}>
-      {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
-        ([option, text]) => (
-          <DropDownItem
-            className={`item ${dropDownActiveClass(value === option)} ${
-              style === 'font-size' ? 'fontsize-item' : ''
-            }`}
-            onClick={() => handleClick(option)}
-            key={option}>
-            <span className="text">{text}</span>
-          </DropDownItem>
-        ),
-      )}
-    </DropDown>
+         <>
+            <Select
+              className="toolbar-item font-family"
+              onChange={onFontFamilySelect}
+              options={[
+                ['Arial'],
+                ['Courier New'],
+                ['Georgia'],
+                ['Times New Roman'],
+                ['Trebuchet MS'],
+                ['Verdana'],
+              ]}
+              value={fontFamily}
+            />
+            <i className="chevron-down inside" />
+          </>
+          <>
+            <Select
+              className="toolbar-item font-size"
+              onChange={onFontSizeSelect}
+              options={[
+                ['10px'],
+                ['11px'],
+                ['12px'],
+                ['13px'],
+                ['14px'],
+                ['15px'],
+                ['16px'],
+                ['17px'],
+                ['18px'],
+                ['19px'],
+                ['20px'],
+              ]}
+              value={fontSize}
+            />
+            <i className="chevron-down inside" />
+          </>
           <Divider />
           <button
             onClick={() => {
@@ -759,3 +728,4 @@ export default function ToolbarPlugin() {
     </div>
   );
 }
+
