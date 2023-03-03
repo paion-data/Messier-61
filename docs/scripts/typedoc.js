@@ -10,8 +10,9 @@ async function main() {
 
   app.bootstrap({
     // typedoc options
-    entryPoints: ["../src/components/Graph/Graph.d.ts"],
+    entryPoints: ["../src/components/Graph/Graph.d.ts", "../src/components/Graph/D3Graph/D3Graph.tsx"],
     tsconfig: "../tsconfig.json",
+    media: "static/img/typedoc",
   });
 
   const project = app.convert();
