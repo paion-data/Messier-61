@@ -33,9 +33,9 @@ export default function GraphPlugin(): JSX.Element {
 
 /**
  * Given a line of text, usually a Lexical child text node, extracts and returns the subject of the text sentence.
- * 
+ *
  * A sentence, or a fact, can usually be described by the following part of speeches:
- * 
+ *
  * <img src="media://SubjectPredicateObject.svg" width="500" />
  *
  * @param line the provided line of text
@@ -53,9 +53,9 @@ export const getFromNode: any = (line: string) => {
 
 /**
  * Given a line of text, usually a Lexical child text node, extracts and returns the object of the text sentence.
- * 
+ *
  * A sentence, or a fact, can usually be described by the following part of speeches:
- * 
+ *
  * <img src="media://SubjectPredicateObject.svg" width="500" />
  *
  * @param line the provided line of text
@@ -74,9 +74,9 @@ export const getToNode: any = (line: string) => {
 
 /**
  * Given a line of text, usually a Lexical child text node, extracts and returns the predicate of the text sentence.
- * 
+ *
  * A sentence, or a fact, can usually be described by the following part of speeches:
- * 
+ *
  * <img src="media://SubjectPredicateObject.svg" width="500" />
  *
  * @param line the provided line of text

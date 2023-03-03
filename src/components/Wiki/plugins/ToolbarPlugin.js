@@ -16,7 +16,13 @@ import {
   $getNodeByKey,
 } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { $isParentElementRTL, $wrapNodes, $isAtNodeEnd, $getSelectionStyleValueForProperty, $patchStyleText } from "@lexical/selection";
+import {
+  $isParentElementRTL,
+  $wrapNodes,
+  $isAtNodeEnd,
+  $getSelectionStyleValueForProperty,
+  $patchStyleText,
+} from "@lexical/selection";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import {
   INSERT_ORDERED_LIST_COMMAND,
@@ -405,8 +411,8 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
-  const [fontFamily, setFontFamily] = useState('Arial');
-  const [fontSize, setFontSize] = useState('15px');
+  const [fontFamily, setFontFamily] = useState("Arial");
+  const [fontSize, setFontSize] = useState("15px");
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -446,12 +452,8 @@ export default function ToolbarPlugin() {
         setIsLink(false);
       }
     }
-    setFontSize(
-        $getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
-      );
-      setFontFamily(
-        $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
-      );
+    setFontSize($getSelectionStyleValueForProperty(selection, "font-size", "15px"));
+    setFontFamily($getSelectionStyleValueForProperty(selection, "font-family", "Arial"));
   }, [editor]);
 
   useEffect(() => {
@@ -520,22 +522,22 @@ export default function ToolbarPlugin() {
         }
       });
     },
-    [editor],
+    [editor]
   );
   const onFontSizeSelect = useCallback(
     (e) => {
-      applyStyleText({'font-size': e.target.value});
+      applyStyleText({ "font-size": e.target.value });
     },
-    [applyStyleText],
+    [applyStyleText]
   );
 
   const onFontFamilySelect = useCallback(
     (e) => {
-      applyStyleText({'font-family': e.target.value});
+      applyStyleText({ "font-family": e.target.value });
     },
-    [applyStyleText],
+    [applyStyleText]
   );
-  
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -595,18 +597,11 @@ export default function ToolbarPlugin() {
         </>
       ) : (
         <>
-         <>
+          <>
             <Select
               className="toolbar-item font-family"
               onChange={onFontFamilySelect}
-              options={[
-                ['Arial'],
-                ['Courier New'],
-                ['Georgia'],
-                ['Times New Roman'],
-                ['Trebuchet MS'],
-                ['Verdana'],
-              ]}
+              options={[["Arial"], ["Courier New"], ["Georgia"], ["Times New Roman"], ["Trebuchet MS"], ["Verdana"]]}
               value={fontFamily}
             />
             <i className="chevron-down inside" />
@@ -616,17 +611,17 @@ export default function ToolbarPlugin() {
               className="toolbar-item font-size"
               onChange={onFontSizeSelect}
               options={[
-                ['10px'],
-                ['11px'],
-                ['12px'],
-                ['13px'],
-                ['14px'],
-                ['15px'],
-                ['16px'],
-                ['17px'],
-                ['18px'],
-                ['19px'],
-                ['20px'],
+                ["10px"],
+                ["11px"],
+                ["12px"],
+                ["13px"],
+                ["14px"],
+                ["15px"],
+                ["16px"],
+                ["17px"],
+                ["18px"],
+                ["19px"],
+                ["20px"],
               ]}
               value={fontSize}
             />
@@ -728,4 +723,3 @@ export default function ToolbarPlugin() {
     </div>
   );
 }
-

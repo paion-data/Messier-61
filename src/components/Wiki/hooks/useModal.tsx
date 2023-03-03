@@ -6,14 +6,14 @@
  *
  */
 
-import {useCallback, useMemo, useState} from 'react';
-import * as React from 'react';
+import { useCallback, useMemo, useState } from "react";
+import * as React from "react";
 
-import Modal from '../ui/Modal';
+import Modal from "../ui/Modal";
 
 export default function useModal(): [
   JSX.Element | null,
-  (title: string, showModal: (onClose: () => void) => JSX.Element) => void,
+  (title: string, showModal: (onClose: () => void) => JSX.Element) => void
 ] {
   const [modalContent, setModalContent] = useState<null | {
     closeOnClickOutside: boolean;
@@ -29,12 +29,9 @@ export default function useModal(): [
     if (modalContent === null) {
       return null;
     }
-    const {title, content, closeOnClickOutside} = modalContent;
+    const { title, content, closeOnClickOutside } = modalContent;
     return (
-      <Modal
-        onClose={onClose}
-        title={title}
-        closeOnClickOutside={closeOnClickOutside}>
+      <Modal onClose={onClose} title={title} closeOnClickOutside={closeOnClickOutside}>
         {content}
       </Modal>
     );
@@ -45,7 +42,7 @@ export default function useModal(): [
       title: string,
       // eslint-disable-next-line no-shadow
       getContent: (onClose: () => void) => JSX.Element,
-      closeOnClickOutside = false,
+      closeOnClickOutside = false
     ) => {
       setModalContent({
         closeOnClickOutside,
@@ -53,7 +50,7 @@ export default function useModal(): [
         title,
       });
     },
-    [onClose],
+    [onClose]
   );
 
   return [modal, showModal];
