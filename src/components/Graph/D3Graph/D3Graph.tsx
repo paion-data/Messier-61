@@ -2,7 +2,6 @@
 import React from "react";
 import type { Graph, Node, Link } from "../Graph";
 import * as d3 from "d3";
-import { drag } from "d3";
 import styles from "./D3Graph.module.css";
 
 /**
