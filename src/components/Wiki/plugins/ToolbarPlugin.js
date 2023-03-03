@@ -2,6 +2,7 @@
 import React from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+// import DropDown, {DropDownItem} from '../../ui/DropDowm';
 import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
@@ -46,6 +47,28 @@ const blockTypeToBlockName = {
   ul: "Bulleted List",
 };
 
+const FONT_FAMILY_OPTIONS = [
+  ['Arial', 'Arial'],
+  ['Courier New', 'Courier New'],
+  ['Georgia', 'Georgia'],
+  ['Times New Roman', 'Times New Roman'],
+  ['Trebuchet MS', 'Trebuchet MS'],
+  ['Verdana', 'Verdana'],
+];
+
+const FONT_SIZE_OPTIONS = [
+  ['10px', '10px'],
+  ['11px', '11px'],
+  ['12px', '12px'],
+  ['13px', '13px'],
+  ['14px', '14px'],
+  ['15px', '15px'],
+  ['16px', '16px'],
+  ['17px', '17px'],
+  ['18px', '18px'],
+  ['19px', '19px'],
+  ['20px', '20px'],
+];
 function Divider() {
   return <div className="divider" />;
 }
@@ -389,6 +412,56 @@ function BlockOptionsDropdownList({ editor, blockType, toolbarRef, setShowBlockO
   );
 }
 
+function FontDropDown({
+  editor,
+  value,
+  style,
+  disabled = false,
+}){
+  const handleClick = useCallback(
+    (option) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, {
+            [style]: option,
+          });
+        }
+      });
+    },
+    [editor, style],
+  );
+
+  const buttonAriaLabel =
+    style === 'font-family'
+      ? 'Formatting options for font family'
+      : 'Formatting options for font size';
+
+  // return (
+    // <DropDown
+    //   disabled={disabled}
+    //   buttonClassName={'toolbar-item ' + style}
+    //   buttonLabel={value}
+    //   buttonIconClassName={
+    //     style === 'font-family' ? 'icon block-type font-family' : ''
+    //   }
+    //   buttonAriaLabel={buttonAriaLabel}>
+    //   {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
+    //     ([option, text]) => (
+    //       <DropDownItem
+    //         className={`item ${dropDownActiveClass(value === option)} ${
+    //           style === 'font-size' ? 'fontsize-item' : ''
+    //         }`}
+    //         onClick={() => handleClick(option)}
+    //         key={option}>
+    //         <span className="text">{text}</span>
+    //       </DropDownItem>
+    //     ),
+    //   )}
+    // </DropDown>
+  // );
+}
+
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -405,6 +478,7 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
+  const [fontFamily, setFontFamily] = useState<string>('Arial');
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -427,6 +501,7 @@ export default function ToolbarPlugin() {
           }
         }
       }
+
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
@@ -445,6 +520,11 @@ export default function ToolbarPlugin() {
       }
     }
   }, [editor]);
+
+      // Handle buttons
+      setFontFamily(
+        $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
+      );
 
   useEffect(() => {
     return mergeRegister(
@@ -562,6 +642,28 @@ export default function ToolbarPlugin() {
         </>
       ) : (
         <>
+    <DropDown
+      disabled={disabled}
+      buttonClassName={'toolbar-item ' + style}
+      buttonLabel={value}
+      buttonIconClassName={
+        style === 'font-family' ? 'icon block-type font-family' : ''
+      }
+      buttonAriaLabel={buttonAriaLabel}>
+      {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
+        ([option, text]) => (
+          <DropDownItem
+            className={`item ${dropDownActiveClass(value === option)} ${
+              style === 'font-size' ? 'fontsize-item' : ''
+            }`}
+            onClick={() => handleClick(option)}
+            key={option}>
+            <span className="text">{text}</span>
+          </DropDownItem>
+        ),
+      )}
+    </DropDown>
+          <Divider />
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
@@ -607,13 +709,13 @@ export default function ToolbarPlugin() {
           >
             <i className="format code" />
           </button>
-          <button
+          {/* <button
             onClick={insertLink}
             className={"toolbar-item spaced " + (isLink ? "active" : "")}
             aria-label="Insert Link"
           >
             <i className="format link" />
-          </button>
+          </button> */}
           {isLink && createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
           <Divider />
           <button
@@ -625,7 +727,7 @@ export default function ToolbarPlugin() {
           >
             <i className="format left-align" />
           </button>
-          <button
+          {/* <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
             }}
@@ -651,7 +753,7 @@ export default function ToolbarPlugin() {
             aria-label="Justify Align"
           >
             <i className="format justify-align" />
-          </button>{" "}
+          </button> */}
         </>
       )}
     </div>
