@@ -1,8 +1,9 @@
-<!-- Copyright 2023 Paion Data. All rights reserved. -->
 ---
 sidebar_position: 2
 title: CI/CD
 ---
+
+<!-- Copyright 2023 Paion Data. All rights reserved. -->
 
 Testing
 -------
@@ -39,13 +40,14 @@ Release Process
 4. Build (`.github/upversion.py`) and push the new tag as the new release version.
 5. Bump Messier-61 version the new release version
 6. Push Messier-61 to [NPM registry][Messier-61 npm repo]
+7. Publish [documentation](#messier-61-documentation) to GitHub Pages
 
 ### Messier-61 Documentation
 
 [GitHub Actions][GitHub Actions] allow us to automate, customize, and execute our software development workflows right
 in our repository. This also applies to our documentations.
 
-Messier-61 documentation source resides in the master branch under `docs/` directory,  publishing source is configured
+Messier-61 documentation source resides in the master branch under `docs/` directory, publishing source is configured
 for the `gh-pages` branch.
 
 The CI/CD for documentation achieves 2 goals:
@@ -54,6 +56,18 @@ The CI/CD for documentation achieves 2 goals:
    actually deploying. This job is called `test-doc-build`.
 2. When a pull request is merged to the `master` branch, it will be built and deployed to the `gh-pages` branch. After
    that, the new build output will be served on the GitHub Pages site. This job is `deploy-documentation` called deploy.
+
+:::info
+
+The documentation build is a 2-step process:
+
+1. A regular [Docusaurus `build`][Docusaurus Build] command that generates the static HTML of
+   [documentation site][documentation]
+2. An execution of TypeDoc Node API that generates the [Messier-61 API documentation][documentation on API]
+
+The output of both of the 2 steps above will be picked up and pushed to GitHub Pages for serving.
+
+:::
 
 Troubleshooting
 ---------------

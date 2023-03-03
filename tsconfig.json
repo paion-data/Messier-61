@@ -8,7 +8,18 @@
     "noImplicitAny": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "strict": true
+    "strict": true,
+
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": ["src"]
 }

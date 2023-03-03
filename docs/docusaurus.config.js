@@ -48,16 +48,6 @@ const config = {
     ],
   ],
 
-  plugins: [
-    [
-      "docusaurus-plugin-typedoc",
-      {
-        entryPoints: ["../src/components/Graph/Graph.d.ts"],
-        tsconfig: "../tsconfig.json",
-      },
-    ],
-  ],
-
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
