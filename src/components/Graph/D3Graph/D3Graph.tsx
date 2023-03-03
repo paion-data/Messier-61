@@ -86,7 +86,7 @@ export function D3Graph(props: GraphConfig): JSX.Element {
  *
  * @returns A D3 visualization whose data is defined by nodes & links
  */
-export function generateD3Graph(props: Graph,canvasConfig: CanvasConfig): JSX.Element {
+export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.Element {
   const svgRef = React.useRef(null);
   const margin = canvasConfig.margin;
   const width = canvasConfig.width - margin.left - margin.right;
@@ -124,6 +124,8 @@ export function generateD3Graph(props: Graph,canvasConfig: CanvasConfig): JSX.El
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("end", ticked);
   }
+  console.log("props.nodes=");
+  console.log(props.nodes);
   generateSimulation(props, ticked);
 
   function ticked(): any {
@@ -149,8 +151,6 @@ export function generateD3Graph(props: Graph,canvasConfig: CanvasConfig): JSX.El
         return d.y - 6;
       });
   }
-
-
   return <svg ref={svgRef} width={width} height={height} />;
 }
 
@@ -186,11 +186,20 @@ export function initializeNode(svg: any, props: Graph): any {
     .append("circle")
     .attr("r", 20)
     .style("fill", "#69B3A2")
-    .on("click", (node: any) => {
-      console.log("click");
-    });
+    // .on("click", (node: any) => {
+    //   console.log("click");
+    // });
+    .on('contextmenu', changeLine)
 }
+const coordinateFrom = function (event: any, d: any) {
+  return d3.pointer(event, d);//节点坐标
+  }
 
+function changeLine(this: any, d: any) {
+  d3.select(this)
+  .attr("x1", coordinateFrom.x)
+  .attr("y1", coordinateFrom.y);
+}
 /**
  * Visual node text
  *

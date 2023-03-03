@@ -27,7 +27,7 @@ export default function App(): JSX.Element {
     name:"2"
   }
 
-  const Line ={
+  const line ={
     id:"3",
     name:"3",
     source:"4",
@@ -36,7 +36,7 @@ export default function App(): JSX.Element {
 
   const graphData: Graph = {
     nodes: [yunNan,shangHai],
-    links: [Line]
+    links: [line]
   };
 
   return (
