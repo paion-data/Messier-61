@@ -36,6 +36,10 @@ module.exports = function (webpackEnv) {
             },
           },
         },
+        {
+          test: /\.module\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
       ],
     },
     plugins: [
