@@ -25,15 +25,13 @@ You can find everything about using Messier-61, including how to start an instan
 architecture overview.
 
 In addition, to make development of Messier-61 a better experience, we've also documented our internal components using
-TypeDoc. Developers of Messier-61 can find useful info at our
-[API documentation page](https://paion-data.github.io/Messier-61/api).
+TypeDoc. Developers of Messier-61 can find useful info at our API documentation page
 
 If you're looking for documentation relating to [contributing to Messier-61][paion CONTRIBUTING guide], more information
 can be found at [Paion Open Source Guide][paion open source guide].
 
 [documentation source]: https://github.com/paion-data/Messier-61/tree/master/docs
 [documentation]: https://paion-data.github.io/Messier-61/
-[documentation on API]: https://paion-data.github.io/Messier-61/api
 [Docusaurus]: https://docusaurus.io/
 [Docusaurus Build]: https://docusaurus.io/docs/cli#docusaurus-build-sitedir
 
