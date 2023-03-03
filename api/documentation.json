@@ -2,78 +2,1038 @@
 	"id": 0,
 	"name": "@paiondata/messier-61",
 	"kind": 1,
-	"kindString": "Project",
 	"flags": {},
 	"originalName": "",
 	"children": [
 		{
-			"id": 1,
-			"name": "Graph",
-			"kind": 256,
-			"kindString": "Interface",
+			"id": 13,
+			"name": "D3Graph/D3Graph",
+			"kind": 2,
+			"kindString": "Module",
 			"flags": {},
-			"comment": {
-				"summary": [
-					{
-						"kind": "text",
-						"text": "A Graph is an abstract data type that is meant to implement the Knowledge Graph (both directed and undirected)\nconcept from the field of graph theory within mathematics.\n\nA knowledge graph is a directed labeled graph in which the labels have well-defined meanings. A directed labeled\ngraph consists of nodes, edges, and labels. Anything can act as a node, for example, people, company, computer, etc.\nAn edge connects a pair of nodes and captures the relationship of interest between them, for example, friendship\nrelationship between two people, customer relationship between a company and person, or a network connection between\ntwo computers. The labels capture the meaning of the relationship, for example, the friendship relationship between\ntwo people."
-					}
-				]
-			},
 			"children": [
 				{
-					"id": 3,
-					"name": "links",
-					"kind": 1024,
-					"kindString": "Property",
+					"id": 40,
+					"name": "Margin",
+					"kind": 256,
+					"kindString": "Interface",
 					"flags": {},
-					"sources": [
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Encapsulate the margin value of the D3 graph"
+							}
+						]
+					},
+					"children": [
 						{
-							"fileName": "Graph.d.ts",
-							"line": 15,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L15"
+							"id": 42,
+							"name": "bottom",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 14,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L14"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 44,
+							"name": "left",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 16,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L16"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 43,
+							"name": "right",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 15,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L15"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 41,
+							"name": "top",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "D3Graph/D3Graph.tsx",
+									"line": 13,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L13"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
 						}
 					],
-					"type": {
-						"type": "array",
-						"elementType": {
-							"type": "reference",
-							"id": 7,
-							"name": "Link"
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								42,
+								44,
+								43,
+								41
+							]
 						}
-					}
+					],
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 12,
+							"character": 17,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L12"
+						}
+					]
 				},
 				{
-					"id": 2,
-					"name": "nodes",
-					"kind": 1024,
-					"kindString": "Property",
+					"id": 14,
+					"name": "D3Graph",
+					"kind": 64,
+					"kindString": "Function",
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "Graph.d.ts",
-							"line": 14,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L14"
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 26,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L26"
 						}
 					],
-					"type": {
-						"type": "array",
-						"elementType": {
-							"type": "reference",
-							"id": 4,
-							"name": "Node"
+					"signatures": [
+						{
+							"id": 15,
+							"name": "D3Graph",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Generates a D3 graph whose content is defined by a provided "
+									},
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "graph data",
+										"target": 1
+									},
+									{
+										"kind": "text",
+										"text": "."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A D3 visualization of network graph"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 16,
+									"name": "props",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "An object containing a list of "
+											},
+											{
+												"kind": "inline-tag",
+												"tag": "@link",
+												"text": "Graph. Node",
+												"target": 13
+											},
+											{
+												"kind": "text",
+												"text": "'s and list of "
+											},
+											{
+												"kind": "inline-tag",
+												"tag": "@link",
+												"text": "Graph. Link",
+												"target": 13
+											},
+											{
+												"kind": "text",
+												"text": "'s"
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "Graph"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "JSX.Element",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react"
+							}
 						}
-					}
+					]
+				},
+				{
+					"id": 20,
+					"name": "attachSvgTo",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 119,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L119"
+						}
+					],
+					"signatures": [
+						{
+							"id": 21,
+							"name": "attachSvgTo",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Define svg style"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A D3 graph with defined dimensions"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 22,
+									"name": "selector",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "A string that conforms to the W3C selector, which is how elements are selected in a css document"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 23,
+									"name": "margin",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "the margin of the svg"
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"id": 40,
+										"name": "Margin"
+									}
+								},
+								{
+									"id": 24,
+									"name": "width",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "the width of the svg"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 25,
+									"name": "height",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "the height of the svg"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					]
+				},
+				{
+					"id": 17,
+					"name": "generateD3Graph",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 39,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L39"
+						}
+					],
+					"signatures": [
+						{
+							"id": 18,
+							"name": "generateD3Graph",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "D3 graph component"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A D3 visualization whose data is defined by nodes & links"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 19,
+									"name": "props",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "Graph"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "JSX.Element",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react"
+							}
+						}
+					]
+				},
+				{
+					"id": 37,
+					"name": "getAllLinks",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 225,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L225"
+						}
+					],
+					"signatures": [
+						{
+							"id": 38,
+							"name": "getAllLinks",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Converts a list of "
+									},
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "Graph. Link",
+										"target": 13
+									},
+									{
+										"kind": "text",
+										"text": "'s to D3-compatible links.\n\nEach of the returned links promises to have the following attributes:\n\n- source\n- target\n\nNote that each link might contain other attributes, which D3 doesn't need for its own good"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "a list of D3 force-graph links"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 39,
+									"name": "inputLinks",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The list of all link objects in Messier-61 format"
+											}
+										]
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 8,
+											"name": "Link"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						}
+					]
+				},
+				{
+					"id": 34,
+					"name": "getAllNodes",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 207,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L207"
+						}
+					],
+					"signatures": [
+						{
+							"id": 35,
+							"name": "getAllNodes",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Converts a list of "
+									},
+									{
+										"kind": "inline-tag",
+										"tag": "@link",
+										"text": "D3Graph. Node",
+										"target": 13
+									},
+									{
+										"kind": "text",
+										"text": "'s to D3-compatible nodes."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "a list of D3 force-graph nodes"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 36,
+									"name": "inputNodes",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "The list of all node objects in Messier-61 format"
+											}
+										]
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 5,
+											"name": "Node"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						}
+					]
+				},
+				{
+					"id": 30,
+					"name": "initializeLinks",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 176,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L176"
+						}
+					],
+					"signatures": [
+						{
+							"id": 31,
+							"name": "initializeLinks",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Generating line"
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A line connect two nodes"
+											}
+										]
+									}
+								]
+							},
+							"parameters": [
+								{
+									"id": 32,
+									"name": "svg",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "A D3 visualization whose data is defined by nodes & links"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 33,
+									"name": "props",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "Graph"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					]
+				},
+				{
+					"id": 26,
+					"name": "initializeNode",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "D3Graph/D3Graph.tsx",
+							"line": 130,
+							"character": 16,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L130"
+						}
+					],
+					"signatures": [
+						{
+							"id": 27,
+							"name": "initializeNode",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 28,
+									"name": "svg",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 29,
+									"name": "props",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "Graph"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					]
 				}
 			],
 			"groups": [
 				{
-					"title": "Properties",
+					"title": "Interfaces",
 					"children": [
-						3,
-						2
+						40
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						14,
+						20,
+						17,
+						37,
+						34,
+						30,
+						26
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "D3Graph/D3Graph.tsx",
+					"line": 2,
+					"character": 0,
+					"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/D3Graph/D3Graph.tsx#L2"
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "Graph",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 2,
+					"name": "Graph",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "A Graph is an abstract data type that is meant to implement the Knowledge Graph (both directed and undirected)\nconcept from the field of graph theory within mathematics.\n\nA knowledge graph is a directed labeled graph in which the labels have well-defined meanings. A directed labeled\ngraph consists of nodes, edges, and labels. Anything can act as a node, for example, people, company, computer, etc.\nAn edge connects a pair of nodes and captures the relationship of interest between them, for example, friendship\nrelationship between two people, customer relationship between a company and person, or a network connection between\ntwo computers. The labels capture the meaning of the relationship, for example, the friendship relationship between\ntwo people."
+							}
+						]
+					},
+					"children": [
+						{
+							"id": 4,
+							"name": "links",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 15,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L15"
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 8,
+									"name": "Link"
+								}
+							}
+						},
+						{
+							"id": 3,
+							"name": "nodes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 14,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L14"
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 5,
+									"name": "Node"
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								4,
+								3
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 13,
+							"character": 17,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L13"
+						}
+					]
+				},
+				{
+					"id": 8,
+					"name": "Link",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 9,
+							"name": "id",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Surrogate key"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 33,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L33"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 10,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 34,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L34"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 11,
+							"name": "source",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 35,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L35"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 12,
+							"name": "target",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 36,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L36"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								9,
+								10,
+								11,
+								12
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 29,
+							"character": 17,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L29"
+						}
+					]
+				},
+				{
+					"id": 5,
+					"name": "Node",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "A node has a unique identifier"
+							}
+						]
+					},
+					"children": [
+						{
+							"id": 6,
+							"name": "id",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Surrogate key"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 25,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L25"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 7,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "Graph.d.ts",
+									"line": 26,
+									"character": 2,
+									"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L26"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								6,
+								7
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "Graph.d.ts",
+							"line": 21,
+							"character": 17,
+							"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L21"
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"children": [
+						2,
+						8,
+						5
 					]
 				}
 			],
@@ -81,220 +1041,19 @@
 				{
 					"fileName": "Graph.d.ts",
 					"line": 13,
-					"character": 17,
-					"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L13"
-				}
-			]
-		},
-		{
-			"id": 7,
-			"name": "Link",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {},
-			"children": [
-				{
-					"id": 8,
-					"name": "id",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"comment": {
-						"summary": [
-							{
-								"kind": "text",
-								"text": "Surrogate key"
-							}
-						]
-					},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 33,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L33"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 9,
-					"name": "name",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 34,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L34"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 10,
-					"name": "source",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 35,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L35"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 11,
-					"name": "target",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 36,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L36"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"children": [
-						8,
-						9,
-						10,
-						11
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "Graph.d.ts",
-					"line": 29,
-					"character": 17,
-					"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L29"
-				}
-			]
-		},
-		{
-			"id": 4,
-			"name": "Node",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {},
-			"comment": {
-				"summary": [
-					{
-						"kind": "text",
-						"text": "A node has a unique identifier"
-					}
-				]
-			},
-			"children": [
-				{
-					"id": 5,
-					"name": "id",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"comment": {
-						"summary": [
-							{
-								"kind": "text",
-								"text": "Surrogate key"
-							}
-						]
-					},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 25,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L25"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 6,
-					"name": "name",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {},
-					"sources": [
-						{
-							"fileName": "Graph.d.ts",
-							"line": 26,
-							"character": 2,
-							"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L26"
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"children": [
-						5,
-						6
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "Graph.d.ts",
-					"line": 21,
-					"character": 17,
-					"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L21"
+					"character": 0,
+					"url": "https://github.com/paion-data/Messier-61/blob/3bbb8e1/src/components/Graph/Graph.d.ts#L13"
 				}
 			]
 		}
 	],
 	"groups": [
 		{
-			"title": "Interfaces",
+			"title": "Modules",
 			"children": [
-				1,
-				7,
-				4
+				13,
+				1
 			]
-		}
-	],
-	"sources": [
-		{
-			"fileName": "Graph.d.ts",
-			"line": 13,
-			"character": 0,
-			"url": "https://github.com/paion-data/Messier-61/blob/03f58ac/src/components/Graph/Graph.d.ts#L13"
 		}
 	]
 }
