@@ -44,6 +44,28 @@ export interface Margin {
   left: number;
 }
 
+export interface CanvasConfig {
+  /**
+   * The {@link Margin margin} of the canvas.
+   */
+  margin: Margin;
+
+  /**
+   * The canvas width.
+   */
+  width: number;
+
+  /**
+   * The canvas height.
+   */
+  height: number;
+}
+
+export interface GraphConfig {
+  graphData: Graph;
+  canvasConfig: CanvasConfig
+}
+
 /**
  * Generates a D3 graph whose content is defined by a provided {@link Graph graph data}.
  *
@@ -51,8 +73,8 @@ export interface Margin {
  *
  * @returns A D3 visualization of network graph
  */
-export function D3Graph(graphData: Graph, canvasConfig: CanvasConfig): JSX.Element {
-  return generateD3Graph(graphData, canvasConfig);
+export function D3Graph(props: GraphConfig): JSX.Element {
+  return generateD3Graph(props.graphData, props.canvasConfig);
 }
 
 /**
@@ -72,20 +94,23 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
   const svg = attachSvgTo(svgRef.current, margin, width, height);
 
   const link = initializeLinks(svg, props);
-  const edgesText = generateEdgesText(svg, props);
-  edgesText
-    .append("textPath")
-    .attr("xlink:href", (d: any, i: string): any => {
-      return i != null && "#edgepath" + i;
-    })
-    .style("pointer-events", "none")
-    .text((d: { lable: any }) => {
-      return d?.lable;
-    });
+  // const edgesText = generateEdgesText(svg, props);
+  // edgesText
+  //   .append("textPath")
+  //   .attr("xlink:href", (d: any, i: string): any => {
+  //     return i != null && "#edgepath" + i;
+  //   })
+  //   .style("pointer-events", "none")
+  //   .text((d: { lable: any }) => {
+  //     return d?.lable;
+  //   });
 
   const node = initializeNode(svg, props);
 
-  generateNodeText(svg, props);
+  // generateNodeText(svg, props);
+
+  console.log("props=");
+  console.log(props)
 
   function generateSimulation(props: Graph, ticked: any): any {
     d3.forceSimulation(getAllNodes(props.nodes))
@@ -100,8 +125,9 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       )
       .force("charge", d3.forceManyBody().strength(-400))
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .on("end", ticked);
+      .on("tick", ticked);
   }
+
   generateSimulation(props, ticked);
 
   function ticked(): any {
@@ -127,7 +153,6 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
         return d.y - 6;
       });
   }
-
   return <svg ref={svgRef} width={width} height={height} />;
 }
 
@@ -163,11 +188,23 @@ export function initializeNode(svg: any, props: Graph): any {
     .append("circle")
     .attr("r", 20)
     .style("fill", "#69B3A2")
-    .on("click", (node: any) => {
-      console.log("click");
-    });
+    // .on("click", (node: any) => {
+    //   console.log("click");
+    // });
+    // .on('click',function(this: any, d: any){
+    //   d3.select(this)
+    //     .style('fill', 'orange')
+    // });
 }
+// const coordinateFrom = function (event: any, d: any) {
+//   return d3.pointer(event, d);//节点坐标
+//   }
 
+// function changeLine(this: any, d: any) {
+//   d3.select(this)
+//   .attr("x1", coordinateFrom.x)
+//   .attr("y1", coordinateFrom.y);
+// }
 /**
  * Visual node text
  *
@@ -177,20 +214,20 @@ export function initializeNode(svg: any, props: Graph): any {
  *
  * @returns A node with text
  */
-function generateNodeText(svg: any, props: Graph): any {
-  return svg
-    .selectAll("text")
-    .data(getAllNodes(props.nodes))
-    .enter()
-    .append("text")
-    .attr("dy", ".3em")
-    .attr("text-anchor", "middle")
-    .style("fill", "black")
-    .style("pointer-events", "none")
-    .text((d: { id: any }): any => {
-      return d?.id;
-    });
-}
+// function generateNodeText(svg: any, props: Graph): any {
+//   return svg
+//     .selectAll("text")
+//     .data(getAllNodes(props.nodes))
+//     .enter()
+//     .append("text")
+//     .attr("dy", ".3em")
+//     .attr("text-anchor", "middle")
+//     .style("fill", "black")
+//     .style("pointer-events", "none")
+//     .text((d: { id: any }): any => {
+//       return d?.id;
+//     });
+// }
 
 /**
  * Generating line
@@ -214,16 +251,16 @@ export function initializeLinks(svg: any, props: Graph): any {
  *
  * @returns A line with text
  */
-function generateEdgesText(svg: any, props: any): any {
-  return svg
-    .selectAll(".edgelabel")
-    .data(getAllLinks(props.links))
-    .enter()
-    .append("text")
-    .attr("class", "edgelabel")
-    .attr("dx", 80)
-    .attr("dy", 0);
-}
+// function generateEdgesText(svg: any, props: any): any {
+//   return svg
+//     .selectAll(".edgelabel")
+//     .data(getAllLinks(props.links))
+//     .enter()
+//     .append("text")
+//     .attr("class", "edgelabel")
+//     .attr("dx", 80)
+//     .attr("dy", 0);
+// }
 
 /**
  * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
