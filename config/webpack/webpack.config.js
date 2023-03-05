@@ -35,11 +35,7 @@ module.exports = function (webpackEnv) {
               maxSize: imageInlineSizeLimit,
             },
           },
-        },
-        {
-          test: /\.module\.css$/,
-          use: ["style-loader", "css-loader"],
-        },
+        }
       ],
     },
     plugins: [
