@@ -3,6 +3,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import type { EditorState } from "lexical";
 import generateId from "../../ID/IdGenerator";
+import type { CanvasConfig } from "../../Graph/D3Graph/D3Graph";
+import type { Graph, Node, Link } from "../../Graph/Graph";
+import { D3Graph } from "../../Graph/D3Graph/D3Graph";
 
 /**
  * A Lexical plugin that, on a part of web page canvas, holds a knowledge graph content.
@@ -42,13 +45,14 @@ export default function GraphPlugin(): JSX.Element {
  *
  * @returns a noun
  */
-export const getFromNode: any = (line: string) => {
+export const getSourceNode: any = (line: string) => {
   const fromNameindex = line?.indexOf("到");
   const fromName = line?.slice(0, fromNameindex);
-  return {
+  const node = {
     id: generateId(),
     name: fromName,
   };
+  return node;
 };
 
 /**
@@ -62,14 +66,15 @@ export const getFromNode: any = (line: string) => {
  *
  * @returns a noun
  */
-export const getToNode: any = (line: string) => {
+export const getTargetNode: any = (line: string) => {
   const fristNameindex = line?.indexOf("到");
   const endNameindex = line?.indexOf(":");
   const toName = line?.slice(fristNameindex + 1, endNameindex);
-  return {
+  const node = {
     id: generateId(),
     name: toName,
   };
+  return node;
 };
 
 /**
@@ -91,12 +96,14 @@ export const getLinkLabelToNode: any = (line: string) => {
   const toName = line?.slice(fristNameindex + 1, endNameindex);
   const firstindex = line?.indexOf("$");
   const linkLabel = line?.slice(firstindex + 1);
-  return {
+  const link = {
     id: generateId(),
     name: linkLabel,
     source: fromName,
     target: toName,
   };
+
+  return link;
 };
 
 /**
@@ -106,14 +113,45 @@ export const getLinkLabelToNode: any = (line: string) => {
  * @returns The obtained data is sent to D3Graph.
  */
 function generateGraphContent(editorState: EditorState): JSX.Element {
-  // const editorContent = editorState.toJSON().root.children;
+  const editorContent = editorState.toJSON().root.children;
+
   // return some D3Graph
+
+  // const graphData  = (content: any): Graph => {
+  //   return {
+  //     nodes: [getFromNode(content),getToNode(content)],
+  //     links: [getLinkLabelToNode(content)]
+  //   }
+
+  // };
+
+  const canvasConfig: CanvasConfig = {
+    height: 400,
+    width: 400,
+    margin: {
+      bottom: 10,
+      left: 10,
+      right: 10,
+      top: 10,
+    },
+  };
+
+  // 深圳到云南:$100
+
+  const graphData: Graph = {
+    nodes: getAllNodes[editorContent],
+    links: getAllLinks([editorContent]),
+  };
+
   return (
     <>
-      {/* {editorContent.map((ele:any, index: number)=>
-  <D3Graph  key={index} nodes={[getFromNode(ele.children[0]?.text),getToNode(ele.children[0]?.text)]} links={[getLinkLabelToNode(ele.children[0]?.text)]}      
-    />
-)} */}
+      <D3Graph graphData={graphData} canvasConfig={canvasConfig} />
     </>
   );
 }
+
+function getAllNodes(lines: string[]): Node[] {
+  return editorContent;
+}
+
+function getAllLinks(lines: string[]): Link[] {}

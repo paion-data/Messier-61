@@ -1,14 +1,14 @@
 // Copyright 2023 Paion Data. All rights reserved.
-import { getFromNode, getToNode, getLinkLabelToNode } from "./GraphPlugin";
+import { getSourceNode, getTargetNode, getLinkLabelToNode } from "./GraphPlugin";
 
 describe("测试", () => {
   test("fromname", () => {
-    console.log(getFromNode("深圳到云南:$156"));
-    expect(getFromNode("深圳到云南:$156").name).toBe("深圳");
+    console.log(getSourceNode("深圳到云南:$156"));
+    expect(getSourceNode("深圳到云南:$156").name).toBe("深圳");
   });
   test("Toname", () => {
-    console.log(getToNode("深圳到云南:$156"));
-    const { name } = getToNode("深圳到云南:$156");
+    console.log(getTargetNode("深圳到云南:$156"));
+    const { name } = getTargetNode("深圳到云南:$156");
     expect(name).toBe("云南");
   });
   test("linklabel", () => {

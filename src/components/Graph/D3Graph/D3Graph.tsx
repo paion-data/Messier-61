@@ -2,7 +2,6 @@
 import React from "react";
 import type { Graph, Node, Link } from "../Graph";
 import * as d3 from "d3";
-
 /**
  * A CanvasConfig describes the whole layout of a rendered D3 graph.
  *
@@ -15,22 +14,6 @@ import * as d3 from "d3";
  * Note that it is not guaranteed that the graph will occupy the entire canvas width or height. It does, however,
  * guarantees the entire graph will fit inside the canvas
  */
-export interface CanvasConfig {
-  /**
-   * The {@link Margin margin} of the canvas.
-   */
-  margin: Margin;
-
-  /**
-   * The canvas width.
-   */
-  width: number;
-
-  /**
-   * The canvas height.
-   */
-  height: number;
-}
 
 /**
  * Encapsulate the margin value of the D3 graph
@@ -43,7 +26,25 @@ export interface Margin {
   right: number;
   left: number;
 }
+export interface CanvasConfig {
+  /**
+   * The {@link Margin margin} of the canvas.
+   */
+  margin: Margin;
+  /**
+   * The canvas width.
+   */
+  width: number;
+  /**
+   * The canvas height.
+   */
+  height: number;
+}
 
+export interface GraphConfig {
+  graphData: Graph;
+  canvasConfig: CanvasConfig;
+}
 /**
  * Generates a D3 graph whose content is defined by a provided {@link Graph graph data}.
  *
@@ -51,10 +52,9 @@ export interface Margin {
  *
  * @returns A D3 visualization of network graph
  */
-export function D3Graph(graphData: Graph, canvasConfig: CanvasConfig): JSX.Element {
-  return generateD3Graph(graphData, canvasConfig);
+export function D3Graph(props: GraphConfig): JSX.Element {
+  return generateD3Graph(props.graphData, props.canvasConfig);
 }
-
 /**
  * D3 graph component
  *
@@ -70,7 +70,6 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
   const width = canvasConfig.width - margin.left - margin.right;
   const height = canvasConfig.height - margin.top - margin.bottom;
   const svg = attachSvgTo(svgRef.current, margin, width, height);
-
   const link = initializeLinks(svg, props);
   const edgesText = generateEdgesText(svg, props);
   edgesText
@@ -82,11 +81,8 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
     .text((d: { lable: any }) => {
       return d?.lable;
     });
-
   const node = initializeNode(svg, props);
-
   generateNodeText(svg, props);
-
   function generateSimulation(props: Graph, ticked: any): any {
     d3.forceSimulation(getAllNodes(props.nodes))
       .force(
@@ -102,8 +98,9 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("end", ticked);
   }
+  console.log("props.nodes=");
+  console.log(props.nodes);
   generateSimulation(props, ticked);
-
   function ticked(): any {
     link
       .attr("x1", function (d: { source: { x: any } }) {
@@ -118,7 +115,6 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       .attr("y2", function (d: { target: { y: any } }) {
         return d.target.y;
       });
-
     node
       .attr("cx", function (d: { x: number }) {
         return d.x + 6;
@@ -127,10 +123,8 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
         return d.y - 6;
       });
   }
-
   return <svg ref={svgRef} width={width} height={height} />;
 }
-
 /**
  * Define svg style
  *
@@ -154,7 +148,6 @@ export function attachSvgTo(selector: any, margin: Margin, width: number, height
     .attr("transform", "translate(" + margin.left.toString() + "," + margin.top.toString() + ")");
   return svg;
 }
-
 export function initializeNode(svg: any, props: Graph): any {
   return svg
     .selectAll("circle")
@@ -191,7 +184,6 @@ function generateNodeText(svg: any, props: Graph): any {
       return d?.id;
     });
 }
-
 /**
  * Generating line
  *
@@ -204,7 +196,6 @@ function generateNodeText(svg: any, props: Graph): any {
 export function initializeLinks(svg: any, props: Graph): any {
   return svg.selectAll("line").data(getAllLinks(props.links)).enter().append("line").style("stroke", "#aaa");
 }
-
 /**
  * Visual line text
  *
@@ -224,7 +215,6 @@ function generateEdgesText(svg: any, props: any): any {
     .attr("dx", 80)
     .attr("dy", 0);
 }
-
 /**
  * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
  *
@@ -235,7 +225,6 @@ function generateEdgesText(svg: any, props: any): any {
 export function getAllNodes(inputNodes: Node[]): any[] {
   return inputNodes;
 }
-
 /**
  * Converts a list of {@link Graph. Link}'s to D3-compatible links.
  *
