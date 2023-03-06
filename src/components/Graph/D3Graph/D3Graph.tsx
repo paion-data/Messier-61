@@ -186,19 +186,9 @@ export function initializeNode(svg: any, props: Graph): any {
     .append("circle")
     .attr("r", 20)
     .style("fill", "#69B3A2")
-    // .on("click", (node: any) => {
-    //   console.log("click");
-    // });
-    .on('contextmenu', changeLine)
-}
-const coordinateFrom = function (event: any, d: any) {
-  return d3.pointer(event, d);//节点坐标
-  }
-
-function changeLine(this: any, d: any) {
-  d3.select(this)
-  .attr("x1", coordinateFrom.x)
-  .attr("y1", coordinateFrom.y);
+    .on("click", (node: any) => {
+      console.log("click");
+    });
 }
 /**
  * Visual node text
@@ -234,7 +224,12 @@ function generateNodeText(svg: any, props: Graph): any {
  * @returns A line connect two nodes
  */
 export function initializeLinks(svg: any, props: Graph): any {
-  return svg.selectAll("line").data(getAllLinks(props.links)).enter().append("line").style("stroke", "#aaa");
+  return svg
+    .selectAll("line")
+    .data(getAllLinks(props.links))
+    .enter()
+    .append("line")
+    .style("stroke", "#aaa");
 }
 
 /**
