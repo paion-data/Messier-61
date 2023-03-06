@@ -2,7 +2,7 @@
 "use strict";
 
 const configFactory = require("../config/webpack/webpack.config");
-const devServerConfig = require('../config/webpack/webpackDevServer.config');
+const devServerConfig = require("../config/webpack/webpackDevServer.config");
 
 const Webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
