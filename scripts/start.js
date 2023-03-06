@@ -9,7 +9,7 @@ const WebpackDevServer = require("webpack-dev-server");
 const webpackConfig = configFactory("development");
 
 const compiler = Webpack(webpackConfig);
-const devServerOptions = { ...devServerConfig, open: true };
+const devServerOptions = { ...devServerConfig, open: true, historyApiFallback: true };
 const server = new WebpackDevServer(devServerOptions, compiler);
 
 server.startCallback(() => {
