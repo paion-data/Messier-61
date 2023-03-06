@@ -93,21 +93,22 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
   const height = canvasConfig.height - margin.top - margin.bottom;
   const svg = attachSvgTo(svgRef.current, margin, width, height);
 
-  const link = initializeLinks(svg, props);
-  // const edgesText = generateEdgesText(svg, props);
-  // edgesText
-  //   .append("textPath")
-  //   .attr("xlink:href", (d: any, i: string): any => {
-  //     return i != null && "#edgepath" + i;
-  //   })
-  //   .style("pointer-events", "none")
-  //   .text((d: { lable: any }) => {
-  //     return d?.lable;
-  //   });
-
   const node = initializeNode(svg, props);
+  generateNodeText(svg, props);
 
-  // generateNodeText(svg, props);
+  const link = initializeLinks(svg, props);
+  const edgesText = generateEdgesText(svg, props);
+  edgesText
+    .append("textPath")
+    .attr("xlink:href", (d: any, i: string): any => {
+      return i != null && "#edgepath" + i;
+    })
+    .style("pointer-events", "none")
+    .text((d: { lable: any }) => {
+      return d?.lable;
+    });
+
+
 
   console.log("props=");
   console.log(props)
@@ -125,6 +126,7 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       )
       .force("charge", d3.forceManyBody().strength(-400))
       .force("center", d3.forceCenter(width / 2, height / 2))
+      .nodes(getAllNodes(props.nodes))
       .on("tick", ticked);
   }
 
@@ -188,13 +190,13 @@ export function initializeNode(svg: any, props: Graph): any {
     .append("circle")
     .attr("r", 20)
     .style("fill", "#69B3A2")
-    // .on("click", (node: any) => {
-    //   console.log("click");
-    // });
-    // .on('click',function(this: any, d: any){
-    //   d3.select(this)
-    //     .style('fill', 'orange')
-    // });
+    .on("click", (node: any) => {
+      console.log("click");
+    });
+  // .on('click',function(this: any, d: any){
+  //   d3.select(this)
+  //     .style('fill', 'orange')
+  // });
 }
 // const coordinateFrom = function (event: any, d: any) {
 //   return d3.pointer(event, d);//节点坐标
@@ -214,20 +216,20 @@ export function initializeNode(svg: any, props: Graph): any {
  *
  * @returns A node with text
  */
-// function generateNodeText(svg: any, props: Graph): any {
-//   return svg
-//     .selectAll("text")
-//     .data(getAllNodes(props.nodes))
-//     .enter()
-//     .append("text")
-//     .attr("dy", ".3em")
-//     .attr("text-anchor", "middle")
-//     .style("fill", "black")
-//     .style("pointer-events", "none")
-//     .text((d: { id: any }): any => {
-//       return d?.id;
-//     });
-// }
+function generateNodeText(svg: any, props: Graph): any {
+  return svg
+    .selectAll("text")
+    .data(getAllNodes(props.nodes))
+    .enter()
+    .append("text")
+    .attr("dy", ".3em")
+    .attr("text-anchor", "middle")
+    .style("fill", "black")
+    .style("pointer-events", "none")
+    .text((d: { id: any }): any => {
+      return d?.id;
+    });
+}
 
 /**
  * Generating line
@@ -239,7 +241,12 @@ export function initializeNode(svg: any, props: Graph): any {
  * @returns A line connect two nodes
  */
 export function initializeLinks(svg: any, props: Graph): any {
-  return svg.selectAll("line").data(getAllLinks(props.links)).enter().append("line").style("stroke", "#aaa");
+  return svg
+    .selectAll("line")
+    .data(getAllLinks(props.links))
+    .enter()
+    .append("line")
+    .style("stroke", "#aaa");
 }
 
 /**
@@ -251,16 +258,16 @@ export function initializeLinks(svg: any, props: Graph): any {
  *
  * @returns A line with text
  */
-// function generateEdgesText(svg: any, props: any): any {
-//   return svg
-//     .selectAll(".edgelabel")
-//     .data(getAllLinks(props.links))
-//     .enter()
-//     .append("text")
-//     .attr("class", "edgelabel")
-//     .attr("dx", 80)
-//     .attr("dy", 0);
-// }
+function generateEdgesText(svg: any, props: any): any {
+  return svg
+    .selectAll(".edgelabel")
+    .data(getAllLinks(props.links))
+    .enter()
+    .append("text")
+    .attr("class", "edgelabel")
+    .attr("dx", 80)
+    .attr("dy", 0);
+}
 
 /**
  * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
