@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import type { EditorState } from "lexical";
 import generateId from "../../ID/IdGenerator";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import D3Graph from "../../Graph/D3Graph/D3Graph";
 
 /**
  * A Lexical plugin that, on a part of web page canvas, holds a knowledge graph content.
@@ -14,6 +16,7 @@ export default function GraphPlugin(): JSX.Element {
   // useCallback is a React Hook that lets you cache a function definition between re-renders.
   const generateGraph = useCallback(
     (editorState: EditorState) => {
+      
       const currentGraph = generateGraphContent(editor.getEditorState());
       setGraphContent(currentGraph);
     },
@@ -105,13 +108,17 @@ export const getLinkLabelToNode: any = (line: string) => {
  * @param editorState The complete field entered by the user.
  * @returns The obtained data is sent to D3Graph.
  */
+
 function generateGraphContent(editorState: EditorState): JSX.Element {
-  // const editorContent = editorState.toJSON().root.children;
+  const editorContent = editorState.toJSON().root.children;
+  console.log(editorContent,"editorContent");
+  
   // return some D3Graph
   return (
     <>
       {/* {editorContent.map((ele:any, index: number)=>
-  <D3Graph  key={index} nodes={[getFromNode(ele.children[0]?.text),getToNode(ele.children[0]?.text)]} links={[getLinkLabelToNode(ele.children[0]?.text)]}      
+  <D3Graph  key={index} nodes={[getFromNode(ele.children[0]?.text),getToNode(ele.children[0]?.text)]} 
+  links={[getLinkLabelToNode(ele.children[0]?.text)]}       
     />
 )} */}
     </>

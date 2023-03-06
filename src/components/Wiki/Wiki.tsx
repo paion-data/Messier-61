@@ -6,8 +6,8 @@ import Editor from "./Editor";
 export default function App(): JSX.Element {
   return (
     <div className="App">
-      <h1>nextwiki</h1>
-      <p>beta development version</p>
+      <img src="https://paion-data.github.io/Messier-61/img/logo.svg" width="128px" height="128px" alt="" />
+      <p id="wiki">Entity Resolution</p>
       <Editor />
     </div>
   );

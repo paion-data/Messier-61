@@ -1,11 +1,13 @@
 /* Copyright 2023 Paion Data. All rights reserved. */
 body {
   margin: 0;
-  background: #eee;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+
+
 }
 
 .App {
@@ -13,9 +15,21 @@ body {
   text-align: center;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
+.App img{
+  width: 128px;
+  height: 128px;
+  margin-left: -1750px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+#wiki{
+  color:#426696;
+  font-size: 40px;
+  margin-left: -1250px;
+  margin-top: -125px;
+  margin-bottom: 45px;
 }
 
 .ltr {
@@ -29,23 +43,41 @@ h1 {
 .editor-container {
   margin: 20px auto 20px auto;
   border-radius: 2px;
-  max-width: 600px;
   color: #000;
+  width: 100%;
   position: relative;
   line-height: 20px;
   font-weight: 400;
   text-align: left;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  padding: 10px;
 }
 
 .editor-inner {
-  background: #fff;
+  background: linear-gradient(to right top, #BDF0EA, #C8F0EF);
   position: relative;
+  flex: 1;
+  height: 750px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.graph_wrap{
+  border-radius: 2px;
+  background-color: #DCF3F9;
+  width: 1000px;
+  height: 750px;
+  margin-top: 42px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .editor-input {
-  min-height: 150px;
+  min-height: 450px;
   resize: none;
   font-size: 15px;
   caret-color: rgb(5, 5, 5);
@@ -327,12 +359,13 @@ pre::-webkit-scrollbar-thumb {
 
 .toolbar {
   display: flex;
-  margin-bottom: 1px;
-  background: #fff;
+  margin-bottom: -33px;
+  background: #FFFFFF;
   padding: 4px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   vertical-align: middle;
+  width: 765px;
 }
 
 .toolbar button.toolbar-item {
@@ -403,13 +436,23 @@ pre::-webkit-scrollbar-thumb {
 
 .toolbar select.code-language {
   text-transform: capitalize;
-  width: 130px;
+  width: 100px;
+}
+
+.toolbar select.font-family{
+  height: 40px;
+}
+.toolbar select.font-size{
+  height: 40px;
+}
+.toolbar select.color{
+  height: 40px;
+  width: 40px;
 }
 
 .toolbar .toolbar-item .text {
   display: flex;
   line-height: 20px;
-  width: 200px;
   vertical-align: middle;
   font-size: 14px;
   color: #777;
@@ -511,8 +554,17 @@ i.chevron-down {
   min-height: 40px;
   background-color: #fff;
 }
-
-.dropdown .item {
+.align_dropdown {
+  z-index: 5;
+  display: block;
+  position: absolute;
+  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  min-width: 20px;
+  min-height: 40px;
+  background-color: #fff;
+}
+.align_dropdown .item, .dropdown .item {
   margin: 0 8px 0 8px;
   padding: 8px;
   color: #050505;
@@ -537,26 +589,28 @@ i.chevron-down {
   background-size: contain;
 }
 
-.dropdown .item:first-child {
+
+
+.align_dropdown .item:first-child,.dropdown .item:first-child {
   margin-top: 8px;
 }
 
-.dropdown .item:last-child {
+.align_dropdown .item:last-child,.dropdown .item:last-child {
   margin-bottom: 8px;
 }
 
-.dropdown .item:hover {
+.align_dropdown .item:hover,.dropdown .item:hover {
   background-color: #eee;
 }
 
-.dropdown .item .text {
+.align_dropdown .item .text,.dropdown .item .text {
   display: flex;
   line-height: 20px;
   flex-grow: 1;
   width: 200px;
 }
 
-.dropdown .item .icon {
+.align_dropdown .item .icon,.dropdown .item .icon {
   display: flex;
   width: 20px;
   height: 20px;
@@ -713,20 +767,27 @@ i.code {
 
 i.link {
   background-image: url(images/icons/link.svg);
+  background-repeat: no-repeat;
+  padding: 0;
+}
+
+span.left-align {
+  background-image: url(images/icons/text-left.svg);
 }
 
 i.left-align {
   background-image: url(images/icons/text-left.svg);
 }
 
-i.center-align {
+span.center-align {
   background-image: url(images/icons/text-center.svg);
 }
 
-i.right-align {
+span.right-align {
   background-image: url(images/icons/text-right.svg);
 }
 
-i.justify-align {
+span.justify-align {
   background-image: url(images/icons/justify.svg);
 }
+

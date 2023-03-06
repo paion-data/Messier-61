@@ -394,7 +394,81 @@ function BlockOptionsDropdownList({ editor, blockType, toolbarRef, setShowBlockO
     </div>
   );
 }
+function AlignOptionsDropdownList({ editor, toolbarRef, setShowAlignOptionsDropDown }) {
+  const dropDownRef = useRef(null);
 
+  useEffect(() => {
+    const toolbar = toolbarRef.current;
+    const dropDown = dropDownRef.current;
+
+    if (toolbar !== null && dropDown !== null) {
+      const { top, left } = toolbar.getBoundingClientRect();
+      dropDown.style.top = `${top + 40}px`;
+      dropDown.style.left = `${left+ 600}px`;
+    }
+  }, [dropDownRef, toolbarRef]);
+
+  useEffect(() => {
+    const dropDown = dropDownRef.current;
+    const toolbar = toolbarRef.current;
+
+    if (dropDown !== null && toolbar !== null) {
+      const handle = (event) => {
+        const target = event.target;
+
+        if (!dropDown.contains(target) && !toolbar.contains(target)) {
+          setShowAlignOptionsDropDown(false);
+        }
+      };
+      document.addEventListener("click", handle);
+
+      return () => {
+        document.removeEventListener("click", handle);
+      };
+    }
+  }, [dropDownRef, setShowAlignOptionsDropDown, toolbarRef]);
+
+  return (
+    <div className="align_dropdown" ref={dropDownRef}>
+        <button className="item"  onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+            }} >
+        <span className="icon left-align" />
+        <span className="text">left</span>
+      </button>
+          <button
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+            }}
+            className="item"
+          >
+            <span className="icon center-align" />
+        <span className="text">center</span>
+          </button>
+          <button
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+            }}
+            className="item"
+          >
+           <span className="icon right-align" />
+        <span className="text">right</span>
+          
+          </button>
+          <button
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+            }}
+            className="item"
+          >
+             <span className="icon justify-align" />
+        <span className="text">justify</span>
+        
+          </button>
+      
+    </div>
+  );
+}
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
@@ -409,10 +483,12 @@ export default function ToolbarPlugin() {
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
-  const [isStrikethrough, setIsStrikethrough] = useState(false);
+  // const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
   const [fontFamily, setFontFamily] = useState("Arial");
   const [fontSize, setFontSize] = useState("15px");
+  const [fontColor, setFontColor] = useState("#000");
+  const [showAlignOptionsDropDown,setShowAlignOptionsDropDown] = useState(false)
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -439,7 +515,7 @@ export default function ToolbarPlugin() {
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
       setIsUnderline(selection.hasFormat("underline"));
-      setIsStrikethrough(selection.hasFormat("strikethrough"));
+      // setIsStrikethrough(selection.hasFormat("strikethrough"));
       setIsCode(selection.hasFormat("code"));
       setIsRTL($isParentElementRTL(selection));
 
@@ -453,6 +529,7 @@ export default function ToolbarPlugin() {
       }
     }
     setFontSize($getSelectionStyleValueForProperty(selection, "font-size", "15px"));
+    setFontColor($getSelectionStyleValueForProperty(selection, 'color', '#000'),);
     setFontFamily($getSelectionStyleValueForProperty(selection, "font-family", "Arial"));
   }, [editor]);
 
@@ -538,6 +615,13 @@ export default function ToolbarPlugin() {
     [applyStyleText]
   );
 
+  const onFontColorSelect = useCallback(
+    (e) => {
+      applyStyleText({"color": e.target.value});
+    },
+    [applyStyleText],
+  );
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -604,7 +688,7 @@ export default function ToolbarPlugin() {
               options={[["Arial"], ["Courier New"], ["Georgia"], ["Times New Roman"], ["Trebuchet MS"], ["Verdana"]]}
               value={fontFamily}
             />
-            <i className="chevron-down inside" />
+          <i className="chevron-down inside" />
           </>
           <>
             <Select
@@ -655,7 +739,7 @@ export default function ToolbarPlugin() {
           >
             <i className="format underline" />
           </button>
-          <button
+          {/* <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
             }}
@@ -663,7 +747,7 @@ export default function ToolbarPlugin() {
             aria-label="Format Strikethrough"
           >
             <i className="format strikethrough" />
-          </button>
+          </button> */}
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
@@ -673,51 +757,58 @@ export default function ToolbarPlugin() {
           >
             <i className="format code" />
           </button>
-          {/* <button
+          <button
             onClick={insertLink}
             className={"toolbar-item spaced " + (isLink ? "active" : "")}
             aria-label="Insert Link"
           >
             <i className="format link" />
-          </button> */}
+          </button>
           {isLink && createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
           <Divider />
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
-            }}
-            className="toolbar-item spaced"
+          <Select
+              className="toolbar-item color"
+              onChange={onFontColorSelect}
+              options={[
+                '#d0021b',
+                '#f5a623',
+                '#f8e71c',
+                '#8b572a',
+                '#7ed321',
+                '#417505',
+                '#bd10e0',
+                '#9013fe',
+                '#4a90e2',
+                '#50e3c2',
+                '#b8e986',
+                '#000000',
+                '#4a4a4a',
+                '#9b9b9b',
+                '#ffffff',
+              ]}
+              value={fontColor}
+            />
+            <i className="chevron-down inside" />
+        <Divider />
+        <>
+        <button
+            className="toolbar-item block-controls"
+            onClick={() => {setShowAlignOptionsDropDown(!showAlignOptionsDropDown);console.log(showAlignOptionsDropDown,"showAlignOptionsDropDown");}}
             aria-label="Left Align"
           >
             <i className="format left-align" />
           </button>
-          {/* <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
-            }}
-            className="toolbar-item spaced"
-            aria-label="Center Align"
-          >
-            <i className="format center-align" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
-            }}
-            className="toolbar-item spaced"
-            aria-label="Right Align"
-          >
-            <i className="format right-align" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
-            }}
-            className="toolbar-item"
-            aria-label="Justify Align"
-          >
-            <i className="format justify-align" />
-          </button> */}
+          {showAlignOptionsDropDown &&
+            createPortal(
+              <AlignOptionsDropdownList
+                editor={editor}
+                toolbarRef={toolbarRef}
+                setShowAlignOptionsDropDown={setShowAlignOptionsDropDown}
+              />,
+              document.body
+            )}
+          <Divider />
+        </>
         </>
       )}
     </div>

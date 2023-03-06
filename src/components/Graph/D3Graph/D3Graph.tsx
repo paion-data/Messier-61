@@ -2,7 +2,35 @@
 import React from "react";
 import type { Graph, Node, Link } from "../Graph";
 import * as d3 from "d3";
-import styles from "./D3Graph.module.css";
+
+/**
+ * A CanvasConfig describes the whole layout of a rendered D3 graph.
+ *
+ * The canvas config contains the following attributes:
+ *
+ * - {@link Margin}
+ * - Canvas width
+ * - Canvas height
+ *
+ * Note that it is not guaranteed that the graph will occupy the entire canvas width or height. It does, however,
+ * guarantees the entire graph will fit inside the canvas
+ */
+export interface CanvasConfig {
+  /**
+   * The {@link Margin margin} of the canvas.
+   */
+  margin: Margin;
+
+  /**
+   * The canvas width.
+   */
+  width: number;
+
+  /**
+   * The canvas height.
+   */
+  height: number;
+}
 
 /**
  * Encapsulate the margin value of the D3 graph
@@ -23,8 +51,8 @@ export interface Margin {
  *
  * @returns A D3 visualization of network graph
  */
-export function D3Graph(props: Graph): JSX.Element {
-  return generateD3Graph(props);
+export default function D3GraphComponent(graphData: Graph, canvasConfig: CanvasConfig): JSX.Element {
+  return generateD3Graph(graphData, canvasConfig);
 }
 
 /**
@@ -36,11 +64,11 @@ export function D3Graph(props: Graph): JSX.Element {
  *
  * @returns A D3 visualization whose data is defined by nodes & links
  */
-export function generateD3Graph(props: Graph): JSX.Element {
+export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.Element {
   const svgRef = React.useRef(null);
-  const margin = { top: 10, right: 30, bottom: 30, left: 40 };
-  const width = styles.svgWidth - margin.left - margin.right;
-  const height = styles.svgHeight - margin.top - margin.bottom;
+  const margin = canvasConfig.margin;
+  const width = canvasConfig.width - margin.left - margin.right;
+  const height = canvasConfig.height - margin.top - margin.bottom;
   const svg = attachSvgTo(svgRef.current, margin, width, height);
 
   const link = initializeLinks(svg, props);
@@ -205,6 +233,8 @@ function generateEdgesText(svg: any, props: any): any {
  * @returns a list of D3 force-graph nodes
  */
 export function getAllNodes(inputNodes: Node[]): any[] {
+  console.log(inputNodes,"inputNodes");
+  
   return inputNodes;
 }
 

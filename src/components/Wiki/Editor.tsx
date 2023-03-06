@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Copyright 2023 Paion Data. All rights reserved.
 import React from "react";
 import DefaultTheme from "./themes/DefaultTheme";
@@ -21,6 +22,8 @@ import { TRANSFORMERS } from "@lexical/markdown";
 
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import { UrlEmailAutoLinkPlugin } from "./plugins/UrlEmailAutoLinkPlugin";
+
+import GraphPlugin from "./plugins/GraphPlugin";
 
 function Placeholder(): JSX.Element {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -54,6 +57,7 @@ export default function Editor(): JSX.Element {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
+        <div>
         <ToolbarPlugin />
         <div className="editor-inner">
           <RichTextPlugin
@@ -61,14 +65,20 @@ export default function Editor(): JSX.Element {
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />
-          <HistoryPlugin />
-          <TreeViewPlugin />
-          <AutoFocusPlugin />
-          <ListPlugin />
+          {/* <HistoryPlugin /> */}
+          {/* <TreeViewPlugin /> */}
+          {/* <AutoFocusPlugin />  */}
+          {/* <ListPlugin />
           <LinkPlugin />
           <UrlEmailAutoLinkPlugin />
           <ListMaxIndentLevelPlugin maxDepth={7} />
-          <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+          <MarkdownShortcutPlugin transformers={TRANSFORMERS} /> */}
+        
+        </div>
+        </div>
+     
+        <div className="graph_wrap">
+        <GraphPlugin /> 
         </div>
       </div>
     </LexicalComposer>

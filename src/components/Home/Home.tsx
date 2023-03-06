@@ -19,7 +19,7 @@ export default function App(): JSX.Element {
             <div className="user">
               <img src="https://paion-data.github.io/Messier-61/img/logo.svg" width="100px" alt="" />
               <h3>Messier 61</h3>
-              <p>Next Generation of Wiki</p>
+              <p id="home">Next Generation of Wiki</p>
             </div>
             <div className="links">
               <div className="link">
@@ -46,7 +46,7 @@ export default function App(): JSX.Element {
           </div>
           <div className="games">
             <div className="status">
-              <h1>Recent Wikis</h1>
+              <p id="home">Recent Wikis</p>
               <input type="text" />
             </div>
             <div className="cards">
