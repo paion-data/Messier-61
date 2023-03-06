@@ -12,6 +12,7 @@ module.exports = function (webpackEnv) {
     entry: "./src/index.tsx",
     mode: isProdEnvironment ? "production" : "development",
     output: {
+      publicPath: "/",
       path: path.resolve(__dirname, "../../dist"),
       filename: isProdEnvironment ? "static/js/[name].[contenthash:8].js" : "static/js/bundle.js",
     },
@@ -35,10 +36,6 @@ module.exports = function (webpackEnv) {
               maxSize: imageInlineSizeLimit,
             },
           },
-        },
-        {
-          test: /\.module\.css$/,
-          use: ["style-loader", "css-loader"],
         },
       ],
     },
