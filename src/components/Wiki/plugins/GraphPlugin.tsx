@@ -114,16 +114,7 @@ export const getLinkLabelToNode: any = (line: string) => {
  */
 function generateGraphContent(editorState: EditorState): JSX.Element {
   const editorContent = editorState.toJSON().root.children;
-
   // return some D3Graph
-
-  // const graphData  = (content: any): Graph => {
-  //   return {
-  //     nodes: [getFromNode(content),getToNode(content)],
-  //     links: [getLinkLabelToNode(content)]
-  //   }
-
-  // };
 
   const canvasConfig: CanvasConfig = {
     height: 400,
@@ -136,12 +127,13 @@ function generateGraphContent(editorState: EditorState): JSX.Element {
     },
   };
 
-  // 深圳到云南:$100
-
-  const graphData: Graph = {
-    nodes: getAllNodes[editorContent],
-    links: getAllLinks([editorContent]),
+  
+  const graphData : Graph = {
+        nodes: getAllNodes(editorContent),
+        links: getAllLinks(editorContent)
   };
+console.log(graphData);
+
 
   return (
     <>
@@ -150,8 +142,23 @@ function generateGraphContent(editorState: EditorState): JSX.Element {
   );
 }
 
-function getAllNodes(lines: string[]): Node[] {
-  return editorContent;
+function getAllNodes(lines: any[]): Node[] {
+  const nodes: Node[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    nodes.push(getSourceNode(lines[i].children[0].text))
+    nodes.push(getTargetNode(lines[i]))
+  }
+
+  return nodes;
+
 }
 
-function getAllLinks(lines: string[]): Link[] {}
+function getAllLinks(lines: any[]): Link[] {
+  const links: Link[] = [];
+
+  for(let i=0; i<lines.length; i++){
+    links.push(getLinkLabelToNode(lines[i].children[0].text))
+  }
+return links;
+}
