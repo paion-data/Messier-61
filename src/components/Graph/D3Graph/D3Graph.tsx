@@ -3,6 +3,17 @@ import React from "react";
 import type { Graph, Node, Link } from "../Graph";
 import * as d3 from "d3";
 
+
+let selectedNode: { x: number; y: number; };
+let selectedTargetNode;
+let selectedLink: any;
+let newLine: any;
+let circlesg;
+let linesg: any;
+let shouldDrag = false;
+let drawingLine = false;
+const linkDistance = 90;
+
 /**
  * A CanvasConfig describes the whole layout of a rendered D3 graph.
  *
@@ -93,25 +104,96 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
   const height = canvasConfig.height - margin.top - margin.bottom;
   const svg = attachSvgTo(svgRef.current, margin, width, height);
 
-  const node = initializeNode(svg, props);
-  generateNodeText(svg, props);
+  // const node = initializeNode(svg, props);
+  // generateNodeText(svg, props);
 
-  const link = initializeLinks(svg, props);
-  const edgesText = generateEdgesText(svg, props);
-  edgesText
-    .append("textPath")
-    .attr("xlink:href", (d: any, i: string): any => {
-      return i != null && "#edgepath" + i;
-    })
-    .style("pointer-events", "none")
-    .text((d: { lable: any }) => {
-      return d?.lable;
-    });
+  // const link = initializeLinks(svg, props);
+  // const edgesText = generateEdgesText(svg, props);
+  // edgesText
+  //   .append("textPath")
+  //   .attr("xlink:href", (d: any, i: string): any => {
+  //     return i != null && "#edgepath" + i;
+  //   })
+  //   .style("pointer-events", "none")
+  //   .text((d: { lable: any }) => {
+  //     return d?.lable;
+  //   });
+
+  /********************************************************************************/
+ 
+
+  const forceSimulation = d3.forceSimulation(getAllNodes(props.nodes))
+    .force(
+      "link",
+      d3
+        .forceLink()
+        .id(function (node: any) {
+          return node.id;
+        })
+        .links(getAllLinks(props.links))
+    )
+    .force("charge", d3.forceManyBody().strength(-400))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .nodes(getAllNodes(props.nodes))
+    .on("end", ticked);
+
+
+  d3.select(window)
+    .on("mousemove", mousemove)
+
+  function arrowRect(svg: any) {
+    return svg.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mousedown", mousedown);
+  }
+  arrowRect(svg)
+
+  function arrowMarker(svg: any) {
+    return svg.append("svg:defs").selectAll("marker")
+      .data(["child"])
+      .enter().append("svg:marker")
+      .attr("id", String)
+      .attr("markerUnits", "userSpaceOnUse")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", linkDistance)
+      .attr("refY", -1.1)
+      .attr("markerWidth", 10)
+      .attr("markerHeight", 10)
+      .attr("orient", "auto")
+      .append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5");
+  }
+  arrowMarker(svg)
+
+  linesg = svg.append("g");
+  circlesg = svg.append("g");
 
 
 
-  console.log("props=");
-  console.log(props)
+  function mousemove() {
+    if (drawingLine && !shouldDrag) {
+      var m = d3.mouse(svg.node());
+      var x = Math.max(0, Math.min(width, m[0]));
+      var y = Math.max(0, Math.min(height, m[1]));
+      // debounce - only start drawing line if it gets a bit big
+      var dx = selectedNode.x - x;
+      var dy = selectedNode.y - y;
+      if (Math.sqrt(dx * dx + dy * dy) > 10) {
+        // draw a line
+        if (!newLine) {
+          newLine = linesg.append("line").attr("class", "new_line");
+        }
+        newLine.attr("x1", function (d: any) { return selectedNode.x; })
+          .attr("y1", function (d: any) { return selectedNode.y; })
+          .attr("x2", function (d: any) { return x; })
+          .attr("y2", function (d: any) { return y; });
+      }
+    }
+  }
+
+
+  /********************************************************************************/
 
   function generateSimulation(props: Graph, ticked: any): any {
     d3.forceSimulation(getAllNodes(props.nodes))
@@ -127,7 +209,7 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       .force("charge", d3.forceManyBody().strength(-400))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .nodes(getAllNodes(props.nodes))
-      .on("tick", ticked);
+      .on("end", ticked);
   }
 
   generateSimulation(props, ticked);
@@ -146,6 +228,7 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
       .attr("y2", function (d: { target: { y: any } }) {
         return d.target.y;
       });
+    console.log(link.source.x);
 
     node
       .attr("cx", function (d: { x: number }) {
@@ -157,7 +240,9 @@ export function generateD3Graph(props: Graph, canvasConfig: CanvasConfig): JSX.E
   }
   return <svg ref={svgRef} width={width} height={height} />;
 }
+/********************************************************************************/
 
+/****************************************************/
 /**
  * Define svg style
  *
@@ -191,22 +276,42 @@ export function initializeNode(svg: any, props: Graph): any {
     .attr("r", 20)
     .style("fill", "#69B3A2")
     .on("click", (node: any) => {
-      console.log("click");
-    });
-  // .on('click',function(this: any, d: any){
-  //   d3.select(this)
-  //     .style('fill', 'orange')
-  // });
+      // console.log("click");
+    })
+    .on("mousedown", nodeMousedown)
+    .on("mouseover", nodeMouseover)
+    .on("mouseout", nodeMouseout);
 }
-// const coordinateFrom = function (event: any, d: any) {
-//   return d3.pointer(event, d);//节点坐标
-//   }
 
-// function changeLine(this: any, d: any) {
-//   d3.select(this)
-//   .attr("x1", coordinateFrom.x)
-//   .attr("y1", coordinateFrom.y);
-// }
+function nodeMouseout(d: any) {
+  if (drawingLine) {
+    selectedTargetNode = null;
+  }
+}
+
+// select target node for new node connection
+function nodeMouseover(d: any) {
+  if (drawingLine && d !== selectedNode) {
+    // highlight and select target node
+    selectedTargetNode = d;
+  }
+}
+
+// select node / start drag
+function nodeMousedown(d:any) {
+  if (!drawingLine) {
+    selectedNode = d;
+    selectedLink = null;
+  }
+  if (!shouldDrag) {
+    //阻止冒泡
+    d3.event.stopPropagation(); 
+    drawingLine = true;
+  }
+  d.fixed = true;
+  force.stop()
+}
+
 /**
  * Visual node text
  *

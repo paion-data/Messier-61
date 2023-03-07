@@ -17,26 +17,9 @@ export default function App(): JSX.Element {
     }
   };
 
-  const yunNan = {
-    id:"1",
-    name:"1"
-  }
-
-  const shangHai = {
-    id:"2",
-    name:"2"
-  }
-
-  const line ={
-    id:"3",
-    name:"3",
-    source:"1",
-    target:"2"
-  }
-
   const graphData: Graph = {
-    nodes: [yunNan,shangHai],
-    links: [line]
+    nodes: [],
+    links: []
   };
 
   return (
