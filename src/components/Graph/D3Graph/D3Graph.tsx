@@ -336,18 +336,15 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
       }
     }
   
-    // d3.select(window)
-    //   .on("keydown", windowKeydown)
-    //   .on("mouseup", windowMouseup)
-    //   .on("mousemove", windowMousemove);
+    d3.select(window)
+      .on("keydown", windowKeydown)
+      .on("mouseup", windowMouseup)
+      .on("mousemove", windowMousemove);
   
     svg.append("rect")
       .attr("width", width)
       .attr("height", height)
-      .on("mousedown", mousedown)
-      .on("keydown", windowKeydown)
-      .on("mouseup", windowMouseup)
-      .on("mousemove", windowMousemove);
+      .on("mousedown", mousedown);
   
     /**
      * Add a new disconnected node to canvas.
