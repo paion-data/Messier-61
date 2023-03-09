@@ -4,11 +4,8 @@ import DefaultTheme from "./themes/DefaultTheme";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import TreeViewPlugin from "./plugins/TreeViewPlugin";
-import GraphPlugin from "./plugins/GraphPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
@@ -21,6 +18,8 @@ import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPl
 import { TRANSFORMERS } from "@lexical/markdown";
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import { UrlEmailAutoLinkPlugin } from "./plugins/UrlEmailAutoLinkPlugin";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import onChange from "./onChange";
 
 const editorConfig = {
   namespace: "Messier-61",
@@ -58,9 +57,7 @@ export default function Editor(): JSX.Element {
             ErrorBoundary={LexicalErrorBoundary}
           />
 
-          <GraphPlugin />
-          <HistoryPlugin />
-          <TreeViewPlugin />
+          <OnChangePlugin onChange={onChange} />
           <AutoFocusPlugin />
           <ListPlugin />
           <LinkPlugin />
