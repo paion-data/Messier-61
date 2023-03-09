@@ -344,7 +344,7 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
           newLine.remove();
           newLine = null;
           simulation.restart();
-        }, 30);
+        }, 300);
       }
     }
   
@@ -374,8 +374,7 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
         x: pointerLocation[0],
         y: pointerLocation[1],
         name: `${DEFAULT_NODE_NAME} ${nodes.length}`,
-        group: 1,
-        fixed: true
+        group: 1
       });
   
       simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
@@ -438,7 +437,7 @@ function initializeSimulation(nodes: any[], links: any[], width: number, height:
       .id(function (d: any) { return d.id })
       .links(links)
     )
-    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("center", d3.forceCenter(width / 2, height / 2));
 }
 
 /**
