@@ -1,6 +1,6 @@
 // Copyright 2023 Paion Data. All rights reserved.
 import * as d3 from "d3";
-import { getAllNodes, attachSvgTo } from "./D3Graph";
+import { initializeNodes, attachSvgTo } from "./D3Graph";
 import type { Margin } from "./D3Graph";
 import type { Node, Link } from "../Graph";
 
@@ -39,7 +39,7 @@ test("verifies input nodes gets converted to D3-compatible format", () => {
     },
   ];
 
-  const actualNodes: any[] = getAllNodes(inputNodes);
+  const actualNodes: any[] = initializeNodes(inputNodes);
 
   expect(actualNodes).toBe(inputNodes);
   actualNodes.forEach((node) => {
@@ -66,7 +66,7 @@ test("verifies input links gets converted to D3-compatible format", () => {
     },
   ];
 
-  const actualLinks = getAllNodes(inputLinks);
+  const actualLinks = initializeNodes(inputLinks);
 
   expect(actualLinks).toBe(inputLinks);
   actualLinks.forEach((link) => {
