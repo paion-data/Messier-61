@@ -52,7 +52,7 @@ export const getSourceNode: any = (line: string) => {
     id: generateId(),
     name: fromName,
   };
-  return node;
+return node
 };
 
 /**
@@ -66,7 +66,7 @@ export const getSourceNode: any = (line: string) => {
  *
  * @returns a noun
  */
-export const getTargetNode: any = (line: string) => {
+export const getTargetNode: any = (line: string,) => {
   const fristNameindex = line?.indexOf("到");
   const endNameindex = line?.indexOf(":");
   const toName = line?.slice(fristNameindex + 1, endNameindex);
@@ -74,6 +74,7 @@ export const getTargetNode: any = (line: string) => {
     id: generateId(),
     name: toName,
   };
+
   return node;
 };
 
@@ -88,19 +89,20 @@ export const getTargetNode: any = (line: string) => {
  *
  * @returns a num
  */
+
 export const getLinkLabelToNode: any = (line: string) => {
-  const fromNameindex = line?.indexOf("到");
-  const fromName = line?.slice(0, fromNameindex);
-  const fristNameindex = line?.indexOf("到");
-  const endNameindex = line?.indexOf(":");
-  const toName = line?.slice(fristNameindex + 1, endNameindex);
+  // const fromNameindex = line?.indexOf("到");
+  // const fromName = line?.slice(0, fromNameindex);
+  // const fristNameindex = line?.indexOf("到");
+  // const endNameindex = line?.indexOf(":");
+  // const toName = line?.slice(fristNameindex + 1, endNameindex);
   const firstindex = line?.indexOf("$");
   const linkLabel = line?.slice(firstindex + 1);
   const link = {
     id: generateId(),
     name: linkLabel,
-    source: fromName,
-    target: toName,
+    source: getSourceNode.id,
+    target: getTargetNode.id
   };
 
   return link;
@@ -112,8 +114,10 @@ export const getLinkLabelToNode: any = (line: string) => {
  * @param editorState The complete field entered by the user.
  * @returns The obtained data is sent to D3Graph.
  */
+
 function generateGraphContent(editorState: EditorState): JSX.Element {
   const editorContent = editorState.toJSON().root.children;
+  
   // return some D3Graph
 
   const canvasConfig: CanvasConfig = {
@@ -126,14 +130,13 @@ function generateGraphContent(editorState: EditorState): JSX.Element {
       top: 10,
     },
   };
-
   
   const graphData : Graph = {
         nodes: getAllNodes(editorContent),
         links: getAllLinks(editorContent)
   };
-console.log(graphData);
 
+console.log(graphData);
 
   return (
     <>
@@ -146,7 +149,9 @@ function getAllNodes(lines: any[]): Node[] {
   const nodes: Node[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    nodes.push(getSourceNode(lines[i].children[0].text))
+    // nodes.push(getSourceNode(lines[i].children[0].text))
+    // nodes.push(getTargetNode(lines[i].children[0].text))
+    nodes.push(getSourceNode(lines[i]))
     nodes.push(getTargetNode(lines[i]))
   }
 
@@ -158,7 +163,9 @@ function getAllLinks(lines: any[]): Link[] {
   const links: Link[] = [];
 
   for(let i=0; i<lines.length; i++){
-    links.push(getLinkLabelToNode(lines[i].children[0].text))
+    // links.push(getLinkLabelToNode(lines[i].children[0].text))
+    links.push(getLinkLabelToNode(lines[i]))
   }
+
 return links;
 }
