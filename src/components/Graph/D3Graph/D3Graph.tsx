@@ -1,7 +1,16 @@
 // Copyright 2023 Paion Data. All rights reserved.
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import type { Graph, Node, Link } from "../Graph";
 import * as d3 from "d3";
+import "./D3Graph.css";
+
+const DELETE_KEY_CODE = 46;
+const BACKSPACE_KEY_CODE = 8;
+
+const DEFAULT_LINK_DISTANCE = 90;
+const DEFAULT_FORCE_STRENGTH = -340;
+
+const DEFAULT_NODE_NAME = "new node";
 
 /**
  * A CanvasConfig describes the whole layout of a rendered D3 graph.
@@ -16,10 +25,6 @@ import * as d3 from "d3";
  * guarantees the entire graph will fit inside the canvas
  */
 export interface CanvasConfig {
-  /**
-   * The {@link Margin margin} of the canvas.
-   */
-  margin: Margin;
 
   /**
    * The canvas width.
@@ -32,28 +37,10 @@ export interface CanvasConfig {
   height: number;
 }
 
-/**
- * Encapsulate the margin value of the D3 graph
- *
- * @type {Margin} top, bottom, left and right margins of the svg
- */
-export interface Margin {
-  top: number;
-  bottom: number;
-  right: number;
-  left: number;
+export interface GraphConfig {
+  graphData: Graph;
+  canvasConfig: CanvasConfig;
 }
-
-const CANVAS_WIDTH = 960;
-const CANVAS_HEIGHT = 500;
-
-const DELETE_KEY_CODE = 46;
-const BACKSPACE_KEY_CODE = 8;
-
-const DEFAULT_LINK_DISTANCE = 90;
-const DEFAULT_FORCE_STRENGTH = -340;
-
-const DEFAULT_NODE_NAME = "new node";
 
 /**
  * Generates a D3 graph whose content is defined by a provided {@link Graph graph data}.
@@ -62,349 +49,353 @@ const DEFAULT_NODE_NAME = "new node";
  *
  * @returns A D3 visualization of network graph
  */
-export function D3Graph(graphData: Graph, canvasConfig: CanvasConfig): JSX.Element {
-  const svgRef = React.useRef(null);
+export function D3Graph(graphConfig: GraphConfig): JSX.Element {
+  const svgRef = useRef(null);
 
-  const width = CANVAS_WIDTH;
-  const height = CANVAS_HEIGHT;
+  const width = graphConfig.canvasConfig.width;
+  const height = graphConfig.canvasConfig.height;
 
-  const nodes: any[] = [];
-  let links: any[] = [];
+  const nodes: any[] = getAllNodes(graphConfig.graphData.nodes);
+  let links: any[] = getAllLinks(graphConfig.graphData.links);
 
-  let selectedSourceNode: any;
-  let selectedTargetNode: any;
-  let selectedLink: any;
-  let newLine: any;
-
-  let drawingLine = false;
-
-  const simulation = initializeSimulation(nodes, links, width, height);
-
-  const svg = attatchSvgTo("#graph", width, height);
-
-  /**
-   * Reload all existing links & nodes and off-load obsolete (soft-deleted) ones.
-   * 
-   * This method is usually called between a D3 force simulation "stop" and "restart" .
-   * 
-   * Executing this function will cause the re-binding of simulation nodes and node data are joined using a key
-   * funciton, which takes the node "name" as the resolving key. 
-   * 
-   * @see [How new links & nodes are loaded onto canvas](https://stackoverflow.com/a/43357028)
-   * @see [D3 drag](https://github.com/d3/d3-drag/blob/v3.0.0/README.md#drag)
-   * @see [key function](https://www.d3indepth.com/datajoins/#key-functions)
-   */
-  function update(): void {
-    const link = linesg.selectAll("line.link")
-      .data(links)
-      .attr("x1", function (d: any) { return d.source.x; })
-      .attr("y1", function (d: any) { return d.source.y; })
-      .attr("x2", function (d: any) { return d.target.x; })
-      .attr("y2", function (d: any) { return d.target.y; })
-      .classed("selected", function (d: any) { return d === selectedLink; });
-
-    link.enter().append("line")
-      .attr("class", "link")
-      .attr("marker-end", "url(#child)")
-      .on("mousedown", linkMousedown);
-
-    // off-load obsolete links due to node removal
-    link.exit().remove();
-
-    const node = circlesg.selectAll(".node")
-      .data(nodes, function (d: any) { return d.name; })
-      .classed("selected", function (d: any) { return d === selectedSourceNode; })
-      .classed("selectedTarget", function (d: any) { return d === selectedTargetNode; })
-
-    const nodeg = node.enter()
-      .append("g")
-      .attr("class", "node")
-      .call(d3.drag)
-      .attr("transform", function (d: any) {
-        return `translate(${d.x as string}, ${d.y as string})`;
-      });
-
-    nodeg.append("circle")
-      .attr("r", 10)
-      .on("mousedown", nodeMousedown)
-      .on("mouseover", nodeMouseover)
-      .on("mouseout", nodeMouseout);
-
-    nodeg.append("svg:a")
-      .attr("xlink:href", function (d: any) { return d.url || '#'; })
-      .append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
-      .text(function (d: any) { return d.name });
-    node.exit().remove();
-
-    simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
-    simulation.on("tick", () => {
-      link.attr("x1", function (d: any) { return d.source.x; })
+  useEffect(() => {
+    let selectedSourceNode: any;
+    let selectedTargetNode: any;
+    let selectedLink: any;
+    let newLine: any;
+  
+    let drawingLine = false;
+  
+    const simulation = initializeSimulation(nodes, links, width, height);
+  
+    const svg = attatchSvgTo(svgRef.current, width, height);
+  
+    /**
+     * Reload all existing links & nodes and off-load obsolete (soft-deleted) ones.
+     * 
+     * This method is usually called between a D3 force simulation "stop" and "restart" .
+     * 
+     * Executing this function will cause the re-binding of simulation nodes and node data are joined using a key
+     * funciton, which takes the node "name" as the resolving key. 
+     * 
+     * @see [How new links & nodes are loaded onto canvas](https://stackoverflow.com/a/43357028)
+     * @see [D3 drag](https://github.com/d3/d3-drag/blob/v3.0.0/README.md#drag)
+     * @see [key function](https://www.d3indepth.com/datajoins/#key-functions)
+     */
+    function update(): void {
+      const link = linesg.selectAll("line.link")
+        .data(links)
+        .attr("x1", function (d: any) { return d.source.x; })
         .attr("y1", function (d: any) { return d.source.y; })
         .attr("x2", function (d: any) { return d.target.x; })
-        .attr("y2", function (d: any) { return d.target.y; });
-      node.attr("transform", function (d: any) {
-        return `translate(${d.x as string}, ${d.y as string})`;
+        .attr("y2", function (d: any) { return d.target.y; })
+        .classed("selected", function (d: any) { return d === selectedLink; });
+  
+      link.enter().append("line")
+        .attr("class", "link")
+        .attr("marker-end", "url(#child)")
+        .on("mousedown", linkMousedown);
+  
+      // off-load obsolete links due to node removal
+      link.exit().remove();
+  
+      const node = circlesg.selectAll(".node")
+        .data(nodes, function (d: any) { return d.name; })
+        .classed("selected", function (d: any) { return d === selectedSourceNode; })
+        .classed("selectedTarget", function (d: any) { return d === selectedTargetNode; })
+  
+      const nodeg = node.enter()
+        .append("g")
+        .attr("class", "node")
+        .call(d3.drag)
+        .attr("transform", function (d: any) {
+          return `translate(${d.x as string}, ${d.y as string})`;
+        });
+  
+      nodeg.append("circle")
+        .attr("r", 10)
+        .on("mousedown", nodeMousedown)
+        .on("mouseover", nodeMouseover)
+        .on("mouseout", nodeMouseout);
+  
+      nodeg.append("svg:a")
+        .attr("xlink:href", function (d: any) { return d.url || '#'; })
+        .append("text")
+        .attr("dx", 12)
+        .attr("dy", ".35em")
+        .text(function (d: any) { return d.name });
+      node.exit().remove();
+  
+      simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
+      simulation.on("tick", () => {
+        link.attr("x1", function (d: any) { return d.source.x; })
+          .attr("y1", function (d: any) { return d.source.y; })
+          .attr("x2", function (d: any) { return d.target.x; })
+          .attr("y2", function (d: any) { return d.target.y; });
+        node.attr("transform", function (d: any) {
+          return `translate(${d.x as string}, ${d.y as string})`;
+        });
       });
-    });
-  }
-
-  /**
-   * An event listener function that selects a link when a pointing device button is pressed while the pointer is inside
-   * a graph link.
-   * 
-   * The function records the currently selected link and deselect any nodes
-   *
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function linkMousedown(event: any, d: any): void {
-    selectedLink = d;
-    selectedSourceNode = null;
-    update();
-  }
-
-  /**
-   * An event listener function that selects a source node when a pointing device button is pressed while the pointer is
-   * inside a graph node.
-   * 
-   * The function records the currently selected node, deselect any links, and flags a link drawing.
-   * 
-   * This function als performs side effect of stoping the simulation and graph reloading by calling {@link update}
-   *
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function nodeMousedown(event: any, d: any): void {
-    if (!drawingLine) {
-      selectedSourceNode = d;
-      selectedLink = null;
     }
-
-    event.stopPropagation();
-    drawingLine = true;
-
-    d.fixed = true;
-
-    simulation.stop()
-
-    update();
-  }
-
-  /**
-   * Prepare a target node selection by resetting the currently selected target node when a pointing device (usually a
-   * mouse) is used to move the cursor so that it is no longer contained within a node element.
-   *
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function nodeMouseout(event: any, d: any): void {
-    if (drawingLine) {
-      selectedTargetNode = null;
-    }
-  }
-
-  /**
-   * Selects, when a button on a pointing device (such as a mouse or trackpad) is released while the pointer is located
-   * inside a node, a target node for new node connection if and only if the target node is not the source node.
-   *
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function nodeMouseover(event: any, d: any): void {
-    if (drawingLine && d !== selectedSourceNode) {
-      // highlight and select target node
-      selectedTargetNode = d;
-    }
-  }
-
-  /**
-   * Handles, after a node or link is mouse-selected, various key stroke event, such as deleting the node or link.
-   * 
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function windowKeydown(event: any, d: any): void {
-    switch (event.keyCode) {
-      case BACKSPACE_KEY_CODE:
-      case DELETE_KEY_CODE: {
-        if (selectedSourceNode) {
-          const i = nodes.indexOf(selectedSourceNode);
-          nodes.splice(i, 1);
-
-          // find links to/from this node, and delete them too
-          const preservedLinks: any = [];
-          links.forEach(function (link) {
-            if (link.source !== selectedSourceNode && link.target !== selectedSourceNode) {
-              preservedLinks.push(link);
-            }
-          });
-          links = preservedLinks;
-
-          selectedSourceNode = nodes.length ? nodes[i > 0 ? i - 1 : 0] : null;
-        } else if (selectedLink) {
-          const i = links.indexOf(selectedLink);
-          links.splice(i, 1);
-
-          selectedLink = links.length ? links[i > 0 ? i - 1 : 0] : null;
-        }
-        update();
-        break;
-      }
-    }
-  }
-
-  /**
-   * Draws yellow "new connector" line when a pointing device (usually a mouse) is moved while the cursor's hotspot is
-   * inside browser window.
-   * 
-   * This happens only when we are drawing a line (i.e. drawingLine = true)
-   * 
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   */
-  function windowMousemove(event: any, d: any): void {
-    if (drawingLine) {
-
-      const pointerLocation = d3.pointer(event, svg.node());
-
-      // confine the dragging inside canvas defined by width and height
-      const x = Math.max(0, Math.min(width, pointerLocation[0]));
-      const y = Math.max(0, Math.min(height, pointerLocation[1]));
-
-      // debouncing - only start drawing when the line gets a bit longer
-      const dx = selectedSourceNode.x - x;
-      const dy = selectedSourceNode.y - y;
-      if (Math.sqrt(dx * dx + dy * dy) > 10) {
-        if (!newLine) {
-          newLine = linesg.append("line").attr("class", "newLine");
-        }
-        newLine.attr("x1", function (d: any) { return selectedSourceNode.x; })
-          .attr("y1", function (d: any) { return selectedSourceNode.y; })
-          .attr("x2", function (d: any) { return x; })
-          .attr("y2", function (d: any) { return y; });
-      }
-    }
-    update();
-  }
-
-  /**
-   * Materializes a link between source and target nodes when a button on a pointing device (such as a mouse or
-   * trackpad) is released while the pointer is located inside the trget node.
-   * 
-   * The closing drag is followed by a 30-ms delay before the link appears on screen
-   * 
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   * @see [setTimeout](https://www.w3schools.com/jsref/met_win_settimeout.asp)
-   */
-  function windowMouseup(event: any, d: any): void {
-    drawingLine = false;
-    if (newLine) {
-      let newNode: any;
-
-      if (selectedTargetNode) {
-        selectedTargetNode.fixed = false;
-        newNode = selectedTargetNode;
-      } else {
-        const pointerLocation = d3.pointer(event, svg.node());
-        newNode = {
-          x: pointerLocation[0],
-          y: pointerLocation[1],
-          name: `${DEFAULT_NODE_NAME} ${nodes.length}`,
-          group: 1
-        }
-        nodes.push(newNode);
-        simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
-      }
-
-      selectedSourceNode.fixed = false;
-      links.push({ source: selectedSourceNode, target: newNode })
-
+  
+    /**
+     * An event listener function that selects a link when a pointing device button is pressed while the pointer is inside
+     * a graph link.
+     * 
+     * The function records the currently selected link and deselect any nodes
+     *
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function linkMousedown(event: any, d: any): void {
+      selectedLink = d;
       selectedSourceNode = null;
-      selectedTargetNode = null;
-
       update();
-
-      setTimeout(function () {
-        newLine.remove();
-        newLine = null;
-        simulation.restart();
-      }, 30);
     }
-  }
-
-  d3.select(window)
-    .on("keydown", windowKeydown)
-    .on("mouseup", windowMouseup)
-    .on("mousemove", windowMousemove)
-
-  svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .on("mousedown", mousedown);
-
-  /**
-   * Add a new disconnected node to canvas.
-   *
-   * @param event An object that contains metadata about the event that triggers this listener function
-   * @param d The datum object bound to the execution context, such as 
-   * 
-   * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
-   * @see [How to obtain pointer location in D3](https://stackoverflow.com/a/63988345)
-   */
-  function mousedown(event: any, d: any): void {
-    const pointerLocation = d3.pointer(event, svg.node())
-
-    nodes.push({
-      x: pointerLocation[0],
-      y: pointerLocation[1],
-      name: `${DEFAULT_NODE_NAME} ${nodes.length}`,
-      group: 1,
-      fixed: true
-    });
-
-    simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
-
-    selectedLink = null;
-
-    simulation.stop();
-    update();
-    simulation.restart();
-  }
-
-  // Arrow marker
-  svg.append("svg:defs").selectAll("marker")
-    .data(["child"])
-    .enter().append("svg:marker")
-    .attr("id", String)
-    .attr("markerUnits", "userSpaceOnUse")
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", DEFAULT_LINK_DISTANCE)
-    .attr("refY", -1.1)
-    .attr("markerWidth", 10)
-    .attr("markerHeight", 10)
-    .attr("orient", "auto")
-    .append("svg:path")
-    .attr("d", "M0,-5L10,0L0,5");
-
-  const linesg = svg.append("g");
-  const circlesg = svg.append("g");
+  
+    /**
+     * An event listener function that selects a source node when a pointing device button is pressed while the pointer is
+     * inside a graph node.
+     * 
+     * The function records the currently selected node, deselect any links, and flags a link drawing.
+     * 
+     * This function als performs side effect of stoping the simulation and graph reloading by calling {@link update}
+     *
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function nodeMousedown(event: any, d: any): void {
+      if (!drawingLine) {
+        selectedSourceNode = d;
+        selectedLink = null;
+      }
+  
+      event.stopPropagation();
+      drawingLine = true;
+  
+      d.fixed = true;
+  
+      simulation.stop()
+  
+      update();
+    }
+  
+    /**
+     * Prepare a target node selection by resetting the currently selected target node when a pointing device (usually a
+     * mouse) is used to move the cursor so that it is no longer contained within a node element.
+     *
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function nodeMouseout(event: any, d: any): void {
+      if (drawingLine) {
+        selectedTargetNode = null;
+      }
+    }
+  
+    /**
+     * Selects, when a button on a pointing device (such as a mouse or trackpad) is released while the pointer is located
+     * inside a node, a target node for new node connection if and only if the target node is not the source node.
+     *
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function nodeMouseover(event: any, d: any): void {
+      if (drawingLine && d !== selectedSourceNode) {
+        // highlight and select target node
+        selectedTargetNode = d;
+      }
+    }
+  
+    /**
+     * Handles, after a node or link is mouse-selected, various key stroke event, such as deleting the node or link.
+     * 
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function windowKeydown(event: any, d: any): void {
+      switch (event.keyCode) {
+        case BACKSPACE_KEY_CODE:
+        case DELETE_KEY_CODE: {
+          if (selectedSourceNode) {
+            const i = nodes.indexOf(selectedSourceNode);
+            nodes.splice(i, 1);
+  
+            // find links to/from this node, and delete them too
+            const preservedLinks: any = [];
+            links.forEach(function (link) {
+              if (link.source !== selectedSourceNode && link.target !== selectedSourceNode) {
+                preservedLinks.push(link);
+              }
+            });
+            links = preservedLinks;
+  
+            selectedSourceNode = nodes.length ? nodes[i > 0 ? i - 1 : 0] : null;
+          } else if (selectedLink) {
+            const i = links.indexOf(selectedLink);
+            links.splice(i, 1);
+  
+            selectedLink = links.length ? links[i > 0 ? i - 1 : 0] : null;
+          }
+          update();
+          break;
+        }
+      }
+    }
+  
+    /**
+     * Draws yellow "new connector" line when a pointing device (usually a mouse) is moved while the cursor's hotspot is
+     * inside browser window.
+     * 
+     * This happens only when we are drawing a line (i.e. drawingLine = true)
+     * 
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     */
+    function windowMousemove(event: any, d: any): void {
+      if (drawingLine) {
+        const pointerLocation = d3.pointer(event, svg.node());
+  
+        // confine the dragging inside canvas defined by width and height
+        const x = Math.max(0, Math.min(width, pointerLocation[0]));
+        const y = Math.max(0, Math.min(height, pointerLocation[1]));
+  
+        // debouncing - only start drawing when the line gets a bit longer
+        const dx = selectedSourceNode.x - x;
+        const dy = selectedSourceNode.y - y;
+        if (Math.sqrt(dx * dx + dy * dy) > 10) {
+          if (!newLine) {
+            newLine = linesg.append("line").attr("class", "newLine");
+          }
+          newLine.attr("x1", function (d: any) { return selectedSourceNode.x; })
+            .attr("y1", function (d: any) { return selectedSourceNode.y; })
+            .attr("x2", function (d: any) { return x; })
+            .attr("y2", function (d: any) { return y; });
+        }
+      }
+      update();
+    }
+  
+    /**
+     * Materializes a link between source and target nodes when a button on a pointing device (such as a mouse or
+     * trackpad) is released while the pointer is located inside the trget node.
+     * 
+     * The closing drag is followed by a 30-ms delay before the link appears on screen
+     * 
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     * @see [setTimeout](https://www.w3schools.com/jsref/met_win_settimeout.asp)
+     */
+    function windowMouseup(event: any, d: any): void {
+      drawingLine = false;
+      if (newLine) {
+        let newNode: any;
+  
+        if (selectedTargetNode) {
+          selectedTargetNode.fixed = false;
+          newNode = selectedTargetNode;
+        } else {
+          const pointerLocation = d3.pointer(event, svg.node());
+          newNode = {
+            x: pointerLocation[0],
+            y: pointerLocation[1],
+            name: `${DEFAULT_NODE_NAME} ${nodes.length}`,
+            group: 1
+          }
+          nodes.push(newNode);
+          simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
+        }
+  
+        selectedSourceNode.fixed = false;
+        links.push({ source: selectedSourceNode, target: newNode })
+  
+        selectedSourceNode = null;
+        selectedTargetNode = null;
+  
+        update();
+  
+        setTimeout(function () {
+          newLine.remove();
+          newLine = null;
+          simulation.restart();
+        }, 30);
+      }
+    }
+  
+    // d3.select(window)
+    //   .on("keydown", windowKeydown)
+    //   .on("mouseup", windowMouseup)
+    //   .on("mousemove", windowMousemove);
+  
+    svg.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mousedown", mousedown)
+      .on("keydown", windowKeydown)
+      .on("mouseup", windowMouseup)
+      .on("mousemove", windowMousemove);
+  
+    /**
+     * Add a new disconnected node to canvas.
+     *
+     * @param event An object that contains metadata about the event that triggers this listener function
+     * @param d The datum object bound to the execution context, such as 
+     * 
+     * @see [Event listener parameter](https://observablehq.com/@d3/d3v6-migration-guide#events)
+     * @see [How to obtain pointer location in D3](https://stackoverflow.com/a/63988345)
+     */
+    function mousedown(event: any, d: any): void {
+      const pointerLocation = d3.pointer(event, svg.node())
+  
+      nodes.push({
+        x: pointerLocation[0],
+        y: pointerLocation[1],
+        name: `${DEFAULT_NODE_NAME} ${nodes.length}`,
+        group: 1,
+        fixed: true
+      });
+  
+      simulation.nodes(nodes); // Reload nodes in simulation - https://github.com/d3/d3-force#simulation_nodes
+  
+      selectedLink = null;
+  
+      simulation.stop();
+      update();
+      simulation.restart();
+    }
+  
+    // Arrow marker
+    svg.append("svg:defs").selectAll("marker")
+      .data(["child"])
+      .enter().append("svg:marker")
+      .attr("id", String)
+      .attr("markerUnits", "userSpaceOnUse")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", DEFAULT_LINK_DISTANCE)
+      .attr("refY", -1.1)
+      .attr("markerWidth", 10)
+      .attr("markerHeight", 10)
+      .attr("orient", "auto")
+      .append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5");
+  
+    const linesg = svg.append("g");
+    const circlesg = svg.append("g");
+  }, [nodes, links, svgRef.current]);
 
   return <svg ref={svgRef} width={width} height={height} />;
 }
@@ -450,11 +441,43 @@ function initializeSimulation(nodes: any[], links: any[], width: number, height:
  *
  * @returns the selection itself, i.e. The bound SVG instance
  */
-function attatchSvgTo(htmlContainer: string, width: number, height: number): any {
+function attatchSvgTo(htmlContainer: any, width: number, height: number): any {
   return d3.select(htmlContainer)
     .append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .on("mousedown", function(e, d) {
+      console.log("CLICK")
+    });
+}
+
+/**
+ * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
+ *
+ * @param inputNodes The list of all node objects in Messier-61 format
+ *
+ * @returns a list of D3 force-graph nodes
+ */
+export function getAllNodes(inputNodes: Node[]): any[] {
+  return inputNodes;
+}
+
+/**
+ * Converts a list of {@link Graph. Link}'s to D3-compatible links.
+ *
+ * Each of the returned links promises to have the following attributes:
+ *
+ * - source
+ * - target
+ *
+ * Note that each link might contain other attributes, which D3 doesn't need for its own good
+ *
+ * @param inputLinks The list of all link objects in Messier-61 format
+ *
+ * @returns a list of D3 force-graph links
+ */
+export function getAllLinks(inputLinks: Link[]): any[] {
+  return inputLinks;
 }
 
 // /**
@@ -627,31 +650,4 @@ function attatchSvgTo(htmlContainer: string, width: number, height: number): any
 //     .attr("dy", 0);
 // }
 
-// /**
-//  * Converts a list of {@link D3Graph. Node}'s to D3-compatible nodes.
-//  *
-//  * @param inputNodes The list of all node objects in Messier-61 format
-//  *
-//  * @returns a list of D3 force-graph nodes
-//  */
-// export function getAllNodes(inputNodes: Node[]): any[] {
-//   return inputNodes;
-// }
 
-// /**
-//  * Converts a list of {@link Graph. Link}'s to D3-compatible links.
-//  *
-//  * Each of the returned links promises to have the following attributes:
-//  *
-//  * - source
-//  * - target
-//  *
-//  * Note that each link might contain other attributes, which D3 doesn't need for its own good
-//  *
-//  * @param inputLinks The list of all link objects in Messier-61 format
-//  *
-//  * @returns a list of D3 force-graph links
-//  */
-// export function getAllLinks(inputLinks: Link[]): any[] {
-//   return inputLinks;
-// }

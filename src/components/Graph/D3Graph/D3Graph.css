@@ -1,0 +1,44 @@
+marker#child {
+  fill: red;
+}
+
+g.node circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+g.node.selected circle {
+  fill: red;
+  stroke-width: 1.5px;
+}
+
+g.node.selectedTarget circle {
+  fill: pink;
+  stroke-width: 1.5px;
+}
+
+g.node text, g.node a {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+line.link {
+  stroke: #999;
+  stroke-opacity: .8;
+  stroke-width: 6px;
+}
+
+line.newLine {
+  stroke: yellow;
+  stroke-opacity: .8;
+  stroke-width: 6px;
+}
+
+line.selected {
+  stroke: red;
+  stroke-opacity: 1;
+}
+
+rect {
+ fill: white;
+}

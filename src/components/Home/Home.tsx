@@ -19,7 +19,7 @@ export default function App(): JSX.Element {
             <div className="user">
               <img src="https://paion-data.github.io/Messier-61/img/logo.svg" width="100px" alt="" />
               <h3>Messier 61</h3>
-              <p>Next Generation of Wiki</p>
+              <p>Your External Brain</p>
             </div>
             <div className="links">
               <div className="link">
@@ -46,15 +46,15 @@ export default function App(): JSX.Element {
           </div>
           <div className="games">
             <div className="status">
-              <h1>Recent Wikis</h1>
+              <h1>Recent</h1>
               <input type="text" />
             </div>
             <div className="cards">
               <div className="card">
                 <img src={genshinImpact} width="105px" alt="" />
                 <div className="card-info">
-                  <h2>Genshin Impact</h2>
-                  <Link to={`wiki/gi`}>Gaming Strategy</Link>
+                  <h2>Some Title</h2>
+                  <Link to={`externalbrain`}>Description</Link>
                   <p></p>
                 </div>
               </div>
