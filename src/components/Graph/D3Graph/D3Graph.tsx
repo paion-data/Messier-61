@@ -37,8 +37,20 @@ export interface CanvasConfig {
   height: number;
 }
 
+/**
+ * A graph config instructs {@link D3Graph} how the D3 network graph is going to be rendered and with what data to be
+ * rendered.
+ */
 export interface GraphConfig {
+
+  /**
+   * The data.
+   */
   graphData: Graph;
+
+  /**
+   * See {@link CanvasConfig}
+   */
   canvasConfig: CanvasConfig;
 }
 
@@ -55,8 +67,8 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
   const width = graphConfig.canvasConfig.width;
   const height = graphConfig.canvasConfig.height;
 
-  const nodes: any[] = getAllNodes(graphConfig.graphData.nodes);
-  let links: any[] = getAllLinks(graphConfig.graphData.links);
+  const nodes: any[] = initializeNodes(graphConfig.graphData.nodes);
+  let links: any[] = initializeLinks(graphConfig.graphData.links);
 
   useEffect(() => {
     let selectedSourceNode: any;
@@ -442,10 +454,7 @@ function attatchSvgTo(htmlContainer: any, width: number, height: number): any {
   return d3.select(htmlContainer)
     .append("svg")
     .attr("width", width)
-    .attr("height", height)
-    .on("mousedown", function(e, d) {
-      console.log("CLICK")
-    });
+    .attr("height", height);
 }
 
 /**
@@ -455,7 +464,7 @@ function attatchSvgTo(htmlContainer: any, width: number, height: number): any {
  *
  * @returns a list of D3 force-graph nodes
  */
-export function getAllNodes(inputNodes: Node[]): any[] {
+export function initializeNodes(inputNodes: Node[]): any[] {
   return inputNodes;
 }
 
@@ -473,7 +482,7 @@ export function getAllNodes(inputNodes: Node[]): any[] {
  *
  * @returns a list of D3 force-graph links
  */
-export function getAllLinks(inputLinks: Link[]): any[] {
+export function initializeLinks(inputLinks: Link[]): any[] {
   return inputLinks;
 }
 
