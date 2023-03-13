@@ -61,8 +61,14 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
   const circleR = 20;
 
   const nodes = initializeNodes(graphConfig.graphData.nodes);
+  console.log(nodes[0].x);
+  for(let key  in nodes[0]){
+    console.log(key + '---' + nodes[0])
+}
+  
   let links = initializeLinks(graphConfig.graphData.links);
-
+  console.log(links[0].source.x,"fhgf");
+  console.log(links);
   useEffect(() => {
     let selectedSourceNode: any;
     let selectedTargetNode: any;
@@ -96,7 +102,7 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
         .attr("transform", function (d: any) {
           return `translate(${d.x as string}, ${d.y as string})`;
         });
-
+  
       nodeg
         .append("circle")
         .attr("r", circleR)
@@ -155,7 +161,6 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
         node.attr("transform", function (d: any) {
           return `translate(${d.x as string}, ${d.y as string})`;
         });
-        update();
       });
     }
 
