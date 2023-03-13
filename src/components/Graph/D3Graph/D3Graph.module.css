@@ -4,17 +4,17 @@ marker#child {
 
 g.node circle {
   stroke: #fff;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
 
 g.node.selected circle {
   fill: red;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
 
 g.node.selectedTarget circle {
   fill: pink;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
 
 g.node text, g.node a {
