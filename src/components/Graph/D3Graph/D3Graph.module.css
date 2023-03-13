@@ -17,20 +17,21 @@ g.node.selectedTarget circle {
   stroke-width: 1px;
 }
 
-g.node text, g.node a {
+g.node text,
+g.node a {
   pointer-events: none;
   font: 10px sans-serif;
 }
 
 line.link {
   stroke: #999;
-  stroke-opacity: .8;
+  stroke-opacity: 0.8;
   stroke-width: 6px;
 }
 
 line.newLine {
   stroke: yellow;
-  stroke-opacity: .8;
+  stroke-opacity: 0.8;
   stroke-width: 6px;
 }
 
@@ -40,5 +41,5 @@ line.selected {
 }
 
 rect {
- fill: white;
+  fill: white;
 }

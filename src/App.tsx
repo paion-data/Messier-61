@@ -8,7 +8,6 @@ import type { CanvasConfig } from "./components/Graph/D3Graph";
 import { Graph } from "./components/Graph/Graph";
 
 export default function App(): JSX.Element {
-
   const graphData: Graph = {
     nodes: [
       {
@@ -16,22 +15,22 @@ export default function App(): JSX.Element {
          * Surrogate key
          */
         id: "1",
-        name: "node1"
+        name: "node1",
       },
       {
         /**
          * Surrogate key
          */
         id: "2",
-        name: "node2"
+        name: "node2",
       },
       {
         /**
          * Surrogate key
          */
         id: "3",
-        name: "node3"
-      }
+        name: "node3",
+      },
     ],
     links: [
       {
@@ -41,7 +40,7 @@ export default function App(): JSX.Element {
         id: "4",
         name: "link1",
         source: "1",
-        target: "2"
+        target: "2",
       },
       {
         /**
@@ -50,21 +49,21 @@ export default function App(): JSX.Element {
         id: "5",
         name: "link2",
         source: "2",
-        target: "3"
-      }
-    ]
-  }
+        target: "3",
+      },
+    ],
+  };
 
   const canvasConfig: CanvasConfig = {
     width: 960,
-    height: 500
-  }
+    height: 500,
+  };
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/externalbrain" element={<D3Graph graphData={graphData} canvasConfig={canvasConfig}/>} />
+        <Route path="/externalbrain" element={<D3Graph graphData={graphData} canvasConfig={canvasConfig} />} />
       </Routes>
     </Router>
   );

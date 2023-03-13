@@ -18,7 +18,8 @@ g.node.selectedTarget circle {
   stroke-width: 1.2px;
 }
 
-g.node text, g.node a {
+g.node text,
+g.node a {
   pointer-events: none;
   font: 13px sans-serif;
 }
@@ -41,5 +42,5 @@ line.selected {
 }
 
 rect {
- fill: white;
+  fill: white;
 }
