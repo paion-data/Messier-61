@@ -67,51 +67,8 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
   const height = graphConfig.canvasConfig.height
   const circleR = 20;
 
-  // const nodes = initializeNodes(graphConfig.graphData.nodes)
-  // let links = initializeLinks(graphConfig.graphData.links)
-  const nodes: any[] = [{
-    /**
-     * Surrogate key
-     */
-    id: "1",
-    name: "node1"
-  },
-  {
-    /**
-     * Surrogate key
-     */
-    id: "2",
-    name: "node2"
-  },
-  {
-    /**
-     * Surrogate key
-     */
-    id: "3",
-    name: "node3"
-  }
-  ]
-  // let links: any[] = initializeLinks(graphConfig.graphData.links);
-  let links: any[] = [
-    {
-      /**
-       * Surrogate key
-       */
-      id: "4",
-      name: "link1",
-      source: "1",
-      target: "2"
-    },
-    {
-      /**
-       * Surrogate key
-       */
-      id: "5",
-      name: "link2",
-      source: "2",
-      target: "3"
-    }
-  ]
+  const nodes = initializeNodes(graphConfig.graphData.nodes)
+  let links = initializeLinks(graphConfig.graphData.links)
 
   useEffect(() => {
 
@@ -157,11 +114,9 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
         .text(function (d: any) { return d.name })
       node.exit().remove();
 
-      //<g> <line class=link x1 y1 x2 y2>...</line> <g></g>
-
       const link = linesg.selectAll("line.link")
         .data(links)
-        .attr("x1", function (d: any) { console.log(d); return d.source.x; })
+        .attr("x1", function (d: any) { return d.source.x; })
         .attr("y1", function (d: any) { return d.source.y; })
         .attr("x2", function (d: any) { return d.target.x; })
         .attr("y2", function (d: any) { return d.target.y; })
@@ -244,12 +199,18 @@ export function D3Graph(graphConfig: GraphConfig): JSX.Element {
           d = selectedTargetNode
         }
 
-        links.push({ source: selectedSourceNode, target: d })
-
+        if (selectedSourceNode != null && selectedTargetNode != null) {
+          links.push({ source: selectedSourceNode, target: d })
+          update()
+        } else {
+          newLine.remove();
+          newLine = null;
+        }
+        
         selectedSourceNode = null;
         selectedTargetNode = null;
 
-        update()
+        
 
         // setTimeout(function () {
         //   newLine.remove();
